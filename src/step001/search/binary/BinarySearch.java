@@ -2,6 +2,7 @@ package step001.search.binary;
 
 /**
  * @author yusik
+ * @date 02/18/2018
  *
  */
 
