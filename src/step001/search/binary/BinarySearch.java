@@ -28,35 +28,37 @@ public class BinarySearch {
 
 	}
 
-	private static int getBinarySearchIndex(int[] priceArray, int searchPrice) {
-		int middle;
+	private static int getBinarySearchIndex(int[] valueArray, int searchValue) {
+
+		int searchIndex = 0;
+		int mid = 0;
 		int left = 0;
-		int right = priceArray.length - 1;
-		int resultIndex = 0;
+		int right = valueArray.length - 1;
 
-		while (right >= left) {
-			sequentialCount++;
-			middle = (right + left) / 2;
+		while (left <= right) {
 
-			if (searchPrice == priceArray[middle]) {
-				resultIndex = middle;
+			mid = (left + right) / 2;
+			if (searchValue == valueArray[mid]) {
+				searchIndex = mid;
 				break;
 			}
 
-			if (searchPrice < priceArray[middle]) {
-				right = middle - 1;
+			if (searchValue >= valueArray[mid]) {
+				left = mid + 1;
 			} else {
-				left = middle + 1;
+				right = mid - 1;
 			}
+
 		}
-		return resultIndex;
+
+		return searchIndex;
 	}
 
-	private static int getSequentialSearchIndex(int[] priceArray, int searchPrice) {
+	private static int getSequentialSearchIndex(int[] valueArray, int searchValue) {
 		int resultIndex = 0;
-		for (int j = 0; j < priceArray.length; j++) {
+		for (int j = 0; j < valueArray.length; j++) {
 			binaryCount++;
-			if (priceArray[j] == searchPrice) {
+			if (valueArray[j] == searchValue) {
 				resultIndex = j;
 				break;
 			}
