@@ -16,10 +16,11 @@ public class TestMain {
 		ArrayList<Integer> test = new ArrayList<Integer>();
 
 		test.add(1);
+		test.add(5);
 		test.add(51);
 		test.indexOf(1);
-
 		System.out.println(test);
 	}
 
 }
+
