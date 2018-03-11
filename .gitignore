@@ -3,4 +3,5 @@
 .settings/*
 bin/*
 
-.iml
+.idea/*
+*.iml
