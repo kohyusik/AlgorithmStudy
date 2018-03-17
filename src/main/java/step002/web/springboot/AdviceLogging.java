@@ -8,8 +8,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
 
 @Aspect
 public class AdviceLogging {
@@ -54,13 +52,22 @@ public class AdviceLogging {
         System.out.println("executionAfter");
     }
 
+    @AfterReturning(pointcut = "execution(* step002..*.*execution(..))", returning = "returnValue")
+    public Object executionAfterReturning(Object returnValue) {
+        System.out.println("executionAfterReturning");
+        System.out.println("return value : " + String.valueOf(returnValue));
+        return returnValue;
+    }
+
     @Around("execution(* step002..*.*execution(..))")
-    public void executionAround(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object executionAround(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("executionAround BEFORE");
 
-        joinPoint.proceed();
+        Object returnValue = joinPoint.proceed();
 
         System.out.println("executionAround AFTER");
+
+        return returnValue;
 
     }
 
