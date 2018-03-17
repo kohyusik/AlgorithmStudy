@@ -41,7 +41,6 @@ public class AdviceLogging {
 //        System.out.println("beforeMethod()실행");
 //    }
 
-
     @Before("execution(* step002..*.*execution(..))")
     public void executionBefore(JoinPoint joinPoint) {
         System.out.println("executionBefore");
@@ -63,11 +62,11 @@ public class AdviceLogging {
     public Object executionAround(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("executionAround BEFORE");
 
-        Object returnValue = joinPoint.proceed();
+        Object returnVal = joinPoint.proceed();
 
         System.out.println("executionAround AFTER");
 
-        return returnValue;
+        return returnVal;
 
     }
 

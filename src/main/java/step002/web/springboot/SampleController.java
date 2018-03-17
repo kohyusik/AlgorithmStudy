@@ -11,15 +11,15 @@ public class SampleController {
 
     @RequestMapping("/")
     @ResponseBody
-    String home() {
-        return "hello world!!!!";
+    String main() {
+        return "hello main!";
     }
 
     @RequestMapping("/execution")
     @ResponseBody
     String execution() {
         System.out.println("execution Controller!!");
-        return "execution!!!!!";
+        return "execution!!!!a!";
     }
 
 }
