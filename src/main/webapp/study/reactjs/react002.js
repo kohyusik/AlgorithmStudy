@@ -10,15 +10,28 @@ var HelloWorld = React.createClass({
     }
 });
 
+var Buttonify = React.createClass({
+    render: function() {
+        return (
+            <div>
+                <button type={this.props.behavior}> {this.props.children} </button>
+            </div>
+        );
+    }
+});
+
+var test = <Buttonify>test</Buttonify>;
+
 ReactDOM.render(
     <div>
-    <HelloWorld bowTarget='TEST'/>
-    <HelloWorld bowTarget='TEST2'/>
-    <HelloWorld bowTarget='TEST3'/>
-    <HelloWorld />
+        <HelloWorld bowTarget='TEST'/>
+        <HelloWorld bowTarget='TEST2'/>
+        <Buttonify behavior="submit"><i>SEND DATA</i></Buttonify>
+        <Buttonify behavior="text">SEND DATA</Buttonify>
     </div>
     , destination
 );
+
 
 // 16 version 부터 createClass 없어짐
 // class HelloWorld extends React.Component {
