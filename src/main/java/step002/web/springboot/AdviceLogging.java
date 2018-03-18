@@ -13,8 +13,7 @@ import org.slf4j.LoggerFactory;
 public class AdviceLogging {
 
     @Pointcut("within(step002.web.springboot.*)")
-    private void pointcutMethod(){
-    }
+    private void pointcutMethod(){}
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -41,6 +40,18 @@ public class AdviceLogging {
 //        System.out.println("beforeMethod()실행");
 //    }
 
+    @Around("execution(* step002..*.*execution(..))")
+    public Object executionAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("executionAround BEFORE");
+
+        Object returnVal = joinPoint.proceed();
+
+        System.out.println("executionAround AFTER");
+
+        return returnVal;
+
+    }
+
     @Before("execution(* step002..*.*execution(..))")
     public void executionBefore(JoinPoint joinPoint) {
         System.out.println("executionBefore");
@@ -56,18 +67,6 @@ public class AdviceLogging {
         System.out.println("executionAfterReturning");
         System.out.println("return value : " + String.valueOf(returnValue));
         return returnValue;
-    }
-
-    @Around("execution(* step002..*.*execution(..))")
-    public Object executionAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("executionAround BEFORE");
-
-        Object returnVal = joinPoint.proceed();
-
-        System.out.println("executionAround AFTER");
-
-        return returnVal;
-
     }
 
 }
