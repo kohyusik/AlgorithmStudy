@@ -1,4 +1,10 @@
 
+/**
+ * @author yusik
+ * @date 03/18/2018
+ * react component(prop, children)
+ */
+
 var destination = document.querySelector('#container');
 
 
