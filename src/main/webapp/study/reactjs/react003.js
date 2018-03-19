@@ -7,13 +7,14 @@
 
 var destination = document.querySelector('#container');
 
+// version 16부터 class
 class Letter extends React.Component {
     render() {
 
         var letterStyle = {
             padding: 10,
             margin: 10,
-            backgroundColor: "#ffde00",
+            backgroundColor: this.props.bgcolor,
             color: "#333",
             display: "inline-block",
             fontFamily: "monospace",
@@ -42,7 +43,7 @@ class Letter extends React.Component {
 
 ReactDOM.render(
     <div>
-        <Letter>A</Letter>
+        <Letter bgcolor="#58B3FF">A</Letter>
         <Letter>E</Letter>
         <Letter>I</Letter>
         <Letter>O</Letter>
@@ -51,15 +52,16 @@ ReactDOM.render(
     , destination
 );
 
+// virtual dom
 setTimeout(function() {
     ReactDOM.render(
         <div>
-            <Letter>A1</Letter>
-            <Letter>E2</Letter>
-            <Letter>I3</Letter>
-            <Letter>O4</Letter>
-            <Letter>U5</Letter>
+            <Letter bgcolor="#58B3FF">A1</Letter>
+            <Letter bgcolor="#FF605F">E2</Letter>
+            <Letter bgcolor="#FFD52E">I3</Letter>
+            <Letter bgcolor="#49DD82">O4</Letter>
+            <Letter bgcolor="#AE99FF">U5</Letter>
         </div>
         , destination
     );
-}, 3000);
+}, 4000);
