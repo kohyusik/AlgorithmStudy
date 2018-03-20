@@ -1,8 +1,8 @@
 
 /**
  * @author yusik
- * @date 03/18/2018
- * react styling
+ * @date 03/20/2018
+ * my code
  */
 
 var destination = document.querySelector('#container');
@@ -13,10 +13,10 @@ var labelHeight = 40;
 
 
 // version 16부터 class
-class Square extends React.Component {
+class Card extends React.Component {
     render() {
 
-        var squareStyle = {
+        var cardStyle = {
             width: squareWidth,
             height: squareHeight,
             backgroundColor: this.props.bgcolor,
@@ -25,16 +25,16 @@ class Square extends React.Component {
         };
 
         return (
-            <div style={squareStyle}>
+            <div style={cardStyle}>
                 {this.props.children}
             </div>
         );
     }
 }
-class Card extends React.Component {
+class Square extends React.Component {
     render() {
 
-        var cardStyle = {
+        var squareStyle = {
             width: squareWidth,
             height: squareHeight - labelHeight,
             backgroundColor: this.props.bgcolor,
@@ -43,7 +43,7 @@ class Card extends React.Component {
         };
 
         return (
-            <div style={cardStyle}>
+            <div style={squareStyle}>
                 {this.props.children}
             </div>
         );
@@ -83,10 +83,10 @@ class Label extends React.Component {
 var color = '#58B3FF';
 ReactDOM.render(
     <div>
-        <Square bgcolor={color}>
-            <Card></Card>
+        <Card bgcolor={color}>
+            <Square></Square>
             <Label bgcolor="#FFF">{color}</Label>
-        </Square>
+        </Card>
     </div>
     , destination
 );
