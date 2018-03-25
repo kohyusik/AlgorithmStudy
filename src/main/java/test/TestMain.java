@@ -27,13 +27,13 @@ public class TestMain {
 		test.add(51);
 		test.indexOf(1);
 		test(String.class);
-		
+		test(Integer.class);
+
 	}
 	
 	public static <T> void test(Class<T> cls) {
 		TypeToken type = new TypeToken<List<T>>(){}
 				.where(new TypeParameter<T>() {
-				
 				}, cls);
 		System.out.println(type.getType());
 	}
