@@ -60,16 +60,6 @@ class Label extends React.Component {
         );
     }
 }
-//
-// var Buttonify = React.createClass({
-//     render: function() {
-//         return (
-//             <div>
-//                 <button type={this.props.behavior}> {this.props.children} </button>
-//             </div>
-//         );
-//     }
-// });
 
 ReactDOM.render(
     <div>
