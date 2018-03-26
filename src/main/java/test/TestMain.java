@@ -22,10 +22,15 @@ public class TestMain {
 //				ParameterizedTypeReferenceBuilder.fromTypeToken(
 //						new TypeToken<CommonResponse<List<T>>>() {}
 //								.where(new TypeParameter<T>() {}, resultType));
-		test.add(1);
-		test.add(5);
-		test.add(51);
-		test.indexOf(1);
+        
+        Long long1 = 15l;
+        long long2 = 15;
+        System.out.println(long1.compareTo(long2));
+        
+//		test.add(1);
+//		test.add(5);
+//		test.add(51);
+//		test.indexOf(1);
 		
 		Map<String, Map<String, Integer>> map;
 		
@@ -56,8 +61,15 @@ public class TestMain {
 				.where(new TypeParameter<K>() {}, cls3)
 				.where(new TypeParameter<X>() {}, ptype)
 				;
+		
+//		Type name = new TypeToken<>(){}.getType();
+//        System.out.println(new TypeToken<>(){}.getType());
+//		TypeToken type2 = new TypeToken<X>(){}
+//                .where(new TypeParameter<X>() {}, ptype)
+		; // error
 //		System.out.println(value.getType());
 		System.out.println(type.getType());
+//		System.out.println(type2.getType());
 	}
 
 }
