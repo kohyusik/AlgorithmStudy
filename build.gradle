@@ -23,5 +23,8 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.guava/guava
     compile group: 'com.google.guava', name: 'guava', version: '23.0'
 
+    // https://mvnrepository.com/artifact/org.springframework/spring-websocket
+    compile group: 'org.springframework', name: 'spring-websocket', version: '5.0.4.RELEASE'
+
 
 }
