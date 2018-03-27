@@ -1,9 +1,8 @@
 package step002.web.socket;
 
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.WebSocketMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.*;
+
+import java.util.List;
 
 /**
  * @author : kohyusik
@@ -12,7 +11,8 @@ import org.springframework.web.socket.WebSocketSession;
  * @description :
  */
 public class MyWebSocketHandler implements WebSocketHandler {
-    
+
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
     
@@ -23,7 +23,18 @@ public class MyWebSocketHandler implements WebSocketHandler {
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
     
         System.out.println(message);
+        if (message instanceof TextMessage) {
+            this.handleMessage(session, (TextMessage) message);
+        }
     
+    }
+
+    public void handleMessage(WebSocketSession session, TextMessage message) throws Exception {
+
+        System.out.println(message.getPayload());
+
+        session.sendMessage(message);
+
     }
     
     @Override
