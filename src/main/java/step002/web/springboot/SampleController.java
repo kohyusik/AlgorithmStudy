@@ -46,7 +46,8 @@ public class SampleController {
     
         Map<String, String> result = new HashMap<>();
         result.put("uri", uri);
-        result.put("request", request.toString());
+        result.put("request", request.getRequestURI());
+        result.put("querystring", request.getQueryString());
         return result;
     }
     

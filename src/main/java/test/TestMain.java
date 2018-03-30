@@ -5,7 +5,16 @@ package test;
 
 import com.google.common.reflect.TypeParameter;
 import com.google.common.reflect.TypeToken;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -15,7 +24,7 @@ import java.util.Map;
  */
 public class TestMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws URISyntaxException {
 
 		ArrayList<Integer> test = new ArrayList<Integer>();
 //		ParameterizedTypeReference<CommonResponse<List<T>>> responseType =
@@ -33,9 +42,37 @@ public class TestMain {
 //		test.indexOf(1);
 		
 		Map<String, Map<String, Integer>> map;
+//
+//		test(String.class, Object.class);
+//		test(String.class, Object.class, Object.class);
 		
-		test(String.class, Object.class);
-		test(String.class, Object.class, Object.class);
+		System.out.println(URLEncoder.encode("###%"));
+		
+		String uriStr = UriComponentsBuilder.newInstance()
+				.scheme("http").host("localhost").port(9999).path("/test")
+				.queryParam("t1", "dbtlr##")
+				.queryParam("t2", "#=?%")
+				.queryParam("t3", 1234)
+				.build().encode().toString();
+		System.out.println(uriStr);
+		
+		URI uri = new URI(uriStr);
+		
+		System.out.println(uri);
+		
+		ResponseEntity<Map> response = null;
+		HttpEntity<?> entity = new HttpEntity<>(new HttpHeaders());
+		RestTemplate restTemplate = new RestTemplate();
+		response = restTemplate.exchange(
+				uriStr, HttpMethod.GET, entity, Map.class);
+		
+		System.out.println(response);
+		ResponseEntity<Map> response2 = null;
+		response2 = restTemplate.exchange(
+				uri, HttpMethod.GET, entity, Map.class);
+		
+		System.out.println(response2);
+		
 		
 	}
 	
@@ -55,21 +92,12 @@ public class TestMain {
 				;
 		
 		Class ptype = value.getRawType();
-//		test(String, ptype);
-//
 		TypeToken type = new TypeToken<Map<K, X>>(){}
 				.where(new TypeParameter<K>() {}, cls3)
 				.where(new TypeParameter<X>() {}, ptype)
 				;
 		
-//		Type name = new TypeToken<>(){}.getType();
-//        System.out.println(new TypeToken<>(){}.getType());
-//		TypeToken type2 = new TypeToken<X>(){}
-//                .where(new TypeParameter<X>() {}, ptype)
-		; // error
-//		System.out.println(value.getType());
 		System.out.println(type.getType());
-//		System.out.println(type2.getType());
 	}
 
 }
