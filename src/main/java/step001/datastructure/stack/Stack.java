@@ -8,7 +8,7 @@ package step001.datastructure.stack;
 
 public class Stack {
 
-	static int top = 0;
+	static int Top = 0;
 	static int Bottom = 0;
 
 	public static void main(String[] args) {
