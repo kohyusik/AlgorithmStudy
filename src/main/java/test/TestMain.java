@@ -16,6 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -49,11 +50,11 @@ public class TestMain {
 		System.out.println(URLEncoder.encode("###%"));
 		
 		String uriStr = UriComponentsBuilder.newInstance()
-				.scheme("http").host("localhost").port(9999).path("/test")
+				.scheme("http").host("localhost").port(9999).path("/test/{test}/{test2}")
 				.queryParam("t1", "dbtlr##")
 				.queryParam("t2", "#=?%")
 				.queryParam("t3", 1234)
-				.build().encode().toString();
+				.build().encode().expand(111, 2222).toString();
 		System.out.println(uriStr);
 		
 		URI uri = new URI(uriStr);
@@ -64,14 +65,16 @@ public class TestMain {
 		HttpEntity<?> entity = new HttpEntity<>(new HttpHeaders());
 		RestTemplate restTemplate = new RestTemplate();
 		response = restTemplate.exchange(
-				uriStr, HttpMethod.GET, entity, Map.class);
+				uriStr, HttpMethod.GET, entity, Map.class, new HashMap<>());
 		
 		System.out.println(response);
 		ResponseEntity<Map> response2 = null;
 		response2 = restTemplate.exchange(
 				uri, HttpMethod.GET, entity, Map.class);
-		
 		System.out.println(response2);
+		
+		System.out.println();
+		System.out.println(new URI("http://127.0.0.1:8080/test/{path1}"));
 		
 		
 	}
