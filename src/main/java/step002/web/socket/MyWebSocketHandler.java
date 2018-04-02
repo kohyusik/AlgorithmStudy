@@ -2,6 +2,7 @@ package step002.web.socket;
 
 import org.springframework.web.socket.*;
 
+import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;

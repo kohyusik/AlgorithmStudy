@@ -36,18 +36,32 @@ public class SampleController {
     public Map test(HttpServletRequest request) {
         
         logger.fine("************ TEST ************");
-        
+
+        Map<String, String> pathVal = new HashMap<>();
+        pathVal.put("test1", "path1");
+        pathVal.put("test", "path");
+        pathVal.put("type", "pathType");
+        pathVal.put("test99", "path999");
+        pathVal.put("test2", "path2");
+        pathVal.put("param3", "param3");
+
         UriComponentsBuilder uriComponents = UriComponentsBuilder.newInstance();
-        uriComponents.scheme("http").host("localhost").port(8080).path("/login/{test1}/{test2}")
-                .path("/{test}").path("/{type}");
+        uriComponents.scheme("http").host("localhost").port(8080)
+                .path("/login/{test1}/{test2}")
+                .path("/{test}")
+                .path("/{type}");
         
-        uriComponents.queryParam("eeeee", 23222);
-        String uri  = uriComponents.build().toString();
+        uriComponents.queryParam("param1", 23222);
+        uriComponents.queryParam("param2");
+        uriComponents.queryParam("param3", "{param3}");
+        String uri  = uriComponents.build().expand(pathVal).toString();
     
         Map<String, String> result = new HashMap<>();
+        result.put("uristr", uriComponents.toUriString());
         result.put("uri", uri);
         result.put("request", request.getRequestURI());
         result.put("querystring", request.getQueryString());
+        result.put("sessionId", request.getAuthType());
         return result;
     }
     
