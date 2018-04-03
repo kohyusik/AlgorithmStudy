@@ -36,16 +36,18 @@ public class TestMain {
         Long long1 = 15l;
         long long2 = 15;
         System.out.println(long1.compareTo(long2));
-        
-//		test.add(1);
-//		test.add(5);
-//		test.add(51);
-//		test.indexOf(1);
 		
-		Map<String, Map<String, Integer>> map;
-//
-//		test(String.class, Object.class);
-//		test(String.class, Object.class, Object.class);
+		Map<String, Object> mapTest = new HashMap<>();
+		mapTest.put("int", 123);
+		mapTest.put("int2", 321);
+		mapTest.put("string", "Hello");
+		
+		
+		UriComponentsBuilder ucb = UriComponentsBuilder.newInstance();
+		mapTest.forEach(System.out::printf);
+		System.out.println();
+		mapTest.forEach(ucb::queryParam);
+		System.out.println(ucb.build().toString());
 		
 		System.out.println(URLEncoder.encode("###%"));
 		
@@ -54,7 +56,7 @@ public class TestMain {
 				.queryParam("t1", "dbtlr##")
 				.queryParam("t2", "#=?%")
 				.queryParam("t3", 1234)
-				.build().encode().expand(111, 2222).toString();
+				.build().expand(111, 2222).encode().toString();
 		System.out.println(uriStr);
 		
 		URI uri = new URI(uriStr);
