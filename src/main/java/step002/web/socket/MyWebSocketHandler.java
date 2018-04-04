@@ -2,7 +2,6 @@ package step002.web.socket;
 
 import org.springframework.web.socket.*;
 
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,7 +60,8 @@ public class MyWebSocketHandler implements WebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
         logger.warning(session.toString());
-        sessionSet.remove(session);
+//        sessionSet.remove(session);
+        sessionSet.forEach((s) -> sessionSet.remove(s));
         logger.info("session list : " + sessionSet);
         logger.info("closed : " + session.getId() + " - " + closeStatus.getReason());
     }
