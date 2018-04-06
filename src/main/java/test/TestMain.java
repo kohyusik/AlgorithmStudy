@@ -16,6 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class TestMain {
         Long long1 = 15l;
         long long2 = 15;
         System.out.println(long1.compareTo(long2));
+		System.out.println(new Date().getTime());
 		
 		Map<String, Object> mapTest = new HashMap<>();
 		mapTest.put("int", 123);
