@@ -18,8 +18,9 @@ public class BitTest {
         System.out.println(178 >>> 2);
 
 //        System.out.println(~10 + 1);
-        System.out.println(-10 >> 2); // 0110
-        System.out.println(-10 >>> 2);
+        System.out.println(-10 >> 2); // 00001010 11110110 >>  11111101 00000011 = 3
+        System.out.println(-10 >>> 2);// 00001010 11110110 >>> 11111101 0011 1111 1111 1111 1111 1111 1111 1101 = 1073741821
+        // java에서 int 는 32bit 이므로 2bit rignt shift 후 앞의 빈칸을 0으로 채운다
         System.out.println(decimalToBinaryString(1073741821));
         System.out.println("****************");
 
