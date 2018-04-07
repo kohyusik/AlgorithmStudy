@@ -1,6 +1,5 @@
 package step001.bit;
 
-import java.text.DecimalFormat;
 import java.util.Stack;
 
 public class BitTest {
@@ -14,11 +13,12 @@ public class BitTest {
 
         //  1011 0010 = 178
         System.out.println("10110010 = 178");
-        System.out.println(178 >> 2);
-        System.out.println(178 >>> 2);
 
-//        System.out.println(~10 + 1);
-        System.out.println(-10 >> 2); // 00001010 11110110 >>  11111101 00000011 = 3
+        // 양수 shift일땐 차이가 없음(둘다 0으로 채우기 때문에)
+        System.out.println(178 >> 2); // 44
+        System.out.println(178 >>> 2); // 44
+
+        System.out.println(-10 >> 2); // 00001010 11110110 >>  11111101 00000011 = -3
         System.out.println(-10 >>> 2);// 00001010 11110110 >>> 11111101 0011 1111 1111 1111 1111 1111 1111 1101 = 1073741821
         // java에서 int 는 32bit 이므로 2bit rignt shift 후 앞의 빈칸을 0으로 채운다
         System.out.println(decimalToBinaryString(1073741821));
