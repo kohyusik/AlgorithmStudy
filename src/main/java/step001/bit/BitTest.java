@@ -12,20 +12,40 @@ public class BitTest {
         System.out.println("6 ^ 5 :" + (6 ^ 5));
         System.out.println("~ 6   :" + (~6));
 
+        //  1011 0010 = 178
+        System.out.println("10110010 = 178");
+        System.out.println(178 >> 2);
+        System.out.println(178 >>> 2);
+
+//        System.out.println(~10 + 1);
+        System.out.println(-10 >> 2); // 0110
+        System.out.println(-10 >>> 2);
+        System.out.println(decimalToBinaryString(1073741821));
+        System.out.println("****************");
+
 
         //  1011 0010 = 178
-        Stack stack = decimalToBinaryString(178, null);
 
+    }
+
+    public static String decimalToBinaryString(int decimal) {
+
+        boolean isPositive = true;
+        if (decimal < 0) {
+            isPositive = false;
+        }
+
+        Stack stack = remainderPushToStack(Math.abs(decimal), null);
 
         StringBuffer sb = new StringBuffer();
         while (!stack.isEmpty()) {
             sb.append(stack.pop());
         }
-        System.out.println(sb.toString());
 
+        return sb.toString();
     }
 
-    public static Stack decimalToBinaryString(int decimal, Stack stack) {
+    public static Stack remainderPushToStack(int decimal, Stack stack) {
         if (stack == null) {
             stack = new Stack();
         }
@@ -38,7 +58,7 @@ public class BitTest {
         if (quotient == 1 || quotient == 0) {
             stack.push(quotient);
         } else {
-            decimalToBinaryString(quotient, stack);
+            remainderPushToStack(quotient, stack);
         }
 
         return stack;
