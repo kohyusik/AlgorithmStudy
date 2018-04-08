@@ -46,7 +46,6 @@ public class Test03 {
     		String 버스출발시간 = 날짜가감기(첫번째버스시간, 운행간격 * i);
     		int 현재인원 = 0;
     		System.out.println("버스출발시간 : " + 버스출발시간);
-//    		System.out.println(j);
     		for (; j < timeArray.size(); j++) {
     			
     			if (sdf.parse(버스출발시간).compareTo(timeArray.get(j)) < 0 || 현재인원 == 수용인원) {
