@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 public class Test02 {
 
     public static void main(String[] args) {
-//        Pattern p = Pattern.compile("^([0-9][0]?[S|D|T][#|[*]]?){3}$");
         Pattern p = Pattern.compile("([0-9][0]?)(S|D|T)(#|[*])?");
 
 //        String inputVal = "1S#7T*3D";
@@ -21,17 +20,11 @@ public class Test02 {
         List<Integer> scoreBoard = new ArrayList<>();
         int seq = 0;
 
-
-
         while (m.find()) {
             int result = 0;
             int score = Integer.parseInt(m.group(1));
             char partS = m.group(2).charAt(0);
             char option = m.group(3) != null? m.group(3).charAt(0) : '?';
-
-//            System.out.println(score);
-//            System.out.println(partS);
-//            System.out.println(option);
 
             switch (partS) {
                 case 'S' :
@@ -61,7 +54,6 @@ public class Test02 {
         for (int i: scoreBoard) {
             totalScore += i;
         }
-//        scoreBoard.parallelStream().forEach((i) -> totalScore += scoreBoard.get(i));
         System.out.println(inputVal);
         System.out.println("total  = " + totalScore);
         System.out.println(scoreBoard);
