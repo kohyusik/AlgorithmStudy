@@ -58,7 +58,7 @@ public class Test03 {
 			}
 		}
 
-		System.out.println(마지막크루도착시간);
+		System.out.println("마지막크루도착시간 : " + 마지막크루도착시간);
     	
     	return 날짜가감기(마지막크루도착시간, -1);
     }
