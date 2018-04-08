@@ -10,11 +10,22 @@ public class Test02 {
     public static void main(String[] args) {
         Pattern p = Pattern.compile("([0-9][0]?)(S|D|T)(#|[*])?");
 
-//        String inputVal = "1S#7T*3D";
-        String inputVal = "1S2D*3T";
-        inputVal = "1D2S3T*";
+        dart("1S2D*3T");
+        dart("1D2S#10S");
+        dart("1D2S0T");
+        dart("1S*2T*3S");
+        dart("1D#2S*3S");
+        dart("1T2D3D#");
+        dart("1D2S3T*");
 
-        Matcher m = p.matcher(inputVal);
+        dart("1S#7T*3D");
+        dart("10T*10T*10T*");
+    }
+
+    public static int dart(String scoreString) {
+        Pattern p = Pattern.compile("([0-9][0]?)(S|D|T)(#|[*])?");
+
+        Matcher m = p.matcher(scoreString);
 
         int totalScore = 0;
         List<Integer> scoreBoard = new ArrayList<>();
@@ -54,8 +65,10 @@ public class Test02 {
         for (int i: scoreBoard) {
             totalScore += i;
         }
-        System.out.println(inputVal);
+        System.out.println(scoreString);
         System.out.println("total  = " + totalScore);
         System.out.println(scoreBoard);
+        System.out.println();
+        return totalScore;
     }
 }
