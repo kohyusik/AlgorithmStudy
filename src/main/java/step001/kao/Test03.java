@@ -15,31 +15,31 @@ public class Test03 {
     public static void main(String[] args) throws ParseException {
     	
     	String[] testCase1 = {"08:00", "08:01", "08:02", "08:03"};
-    	System.out.println("***** 정답 :" + getButTime(1, 1, 5, testCase1));
+    	System.out.println("***** 정답 :" + getBusTime(1, 1, 5, testCase1));
 		System.out.println();System.out.println();
 
     	String[] testCase2 = {"09:10", "09:09", "08:00"};
-    	System.out.println("***** 정답 : " + getButTime(2, 10, 2, testCase2));
+    	System.out.println("***** 정답 : " + getBusTime(2, 10, 2, testCase2));
 		System.out.println();System.out.println();
 
     	String[] testCase3 = {"09:00", "09:00", "09:00", "09:00"};
-		System.out.println("***** 정답 : " + getButTime(2, 1, 2, testCase3));
+		System.out.println("***** 정답 : " + getBusTime(2, 1, 2, testCase3));
 		System.out.println();System.out.println();
 
     	String[] testCase4 = {"00:01", "00:01", "00:01", "00:01", "00:01"};
-		System.out.println("***** 정답 : " + getButTime(1, 1, 5, testCase4));
+		System.out.println("***** 정답 : " + getBusTime(1, 1, 5, testCase4));
 		System.out.println();System.out.println();
 
     	String[] testCase5 = {"23:59"};
-		System.out.println("***** 정답 : " + getButTime(1, 1, 1, testCase5));
+		System.out.println("***** 정답 : " + getBusTime(1, 1, 1, testCase5));
 		System.out.println();System.out.println();
 
     	String[] testCase6 = {"23:59","23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59"};
-		System.out.println("***** 정답 : " + getButTime(10, 60, 45, testCase6));
+		System.out.println("***** 정답 : " + getBusTime(10, 60, 45, testCase6));
     	
     }
     
-    public static String getButTime(int 운행횟수, int 운행간격, int 수용인원, String[] timetable) throws ParseException {
+    public static String getBusTime(int 운행횟수, int 운행간격, int 수용인원, String[] timetable) throws ParseException {
 
     	List<Date> timeArray = timetableToList(timetable);
     	System.out.println(timeArray);
