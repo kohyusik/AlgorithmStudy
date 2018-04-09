@@ -28,7 +28,7 @@ public class Test04 {
 
     }
 
-    public static int getJaccardSimilarity (String str1, String str2) {
+    public static int getJaccardSimilarity(String str1, String str2) {
 
         double answer = 1.;
 
