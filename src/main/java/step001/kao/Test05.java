@@ -13,6 +13,7 @@ public class Test05 {
                  "AAABF",
                  "CCBBF"};
         printBoard(createBoard(4, 5, input1));
+        searchArount(1, 1, createBoard(4, 5, input1));
         System.out.println();System.out.println();
 
         String[] input2 = {"TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"};
@@ -40,6 +41,24 @@ public class Test05 {
             }
             System.out.println();
         }
+    }
+
+    public static void searchArount(int x, int y, char[][] board) {
+
+        if (x > 0 && x < board[0].length) {
+            if (y > 0 && y < board.length) {
+                System.out.println(board[x - 1][y - 1]);
+                System.out.println(board[x - 1][y]);
+                System.out.println(board[x - 1][y + 1]);
+                System.out.println(board[x][y - 1]);
+                System.out.println(board[x][y + 1]);
+                System.out.println(board[x + 1][y - 1]);
+                System.out.println(board[x + 1][y]);
+                System.out.println(board[x + 1][y + 1]);
+            }
+        }
+
+
     }
 
 }
