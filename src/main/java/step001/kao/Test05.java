@@ -84,6 +84,7 @@ public class Test05 {
         	removeBlock(board, set);
         	score += playGame(board);
         }
+//        printBoard(board);
         
     	return score;
 
@@ -107,8 +108,8 @@ public class Test05 {
             	if (board[i][j] == ' ') {
             		for (int k = i - 1; k >= 0; k--) {
             			if (board[k][j] != ' ') {
-            				board[i][j] = board[k][j];
-            				board[k][j] = ' ';
+            				board[i][j] = board[k][j]; // 내리고
+            				board[k][j] = ' '; // 지우고
 //            		    	printBoard(board);
             			}
             		}
