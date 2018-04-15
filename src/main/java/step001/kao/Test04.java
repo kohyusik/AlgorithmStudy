@@ -1,99 +1,105 @@
 package step001.kao;
 
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Test04 {
+	
+	static String 첫번째버스시간 = "09:00";
+	static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
+    public static void main(String[] args) throws ParseException {
+    	
+    	String[] testCase1 = {"08:00", "08:01", "08:02", "08:03"};
+    	System.out.println("***** 정답 :" + getBusTime(1, 1, 5, testCase1));
+		System.out.println();System.out.println();
 
-    public static void main(String[] args) {
+    	String[] testCase2 = {"09:10", "09:09", "08:00"};
+    	System.out.println("***** 정답 : " + getBusTime(2, 10, 2, testCase2));
+		System.out.println();System.out.println();
 
-        System.out.println(getJaccardSimilarity("FRANCE", "french"));
-        System.out.println();
+    	String[] testCase3 = {"09:00", "09:00", "09:00", "09:00"};
+		System.out.println("***** 정답 : " + getBusTime(2, 1, 2, testCase3));
+		System.out.println();System.out.println();
 
-        System.out.println(getJaccardSimilarity("handshake", "shake hands"));
-        System.out.println();
+    	String[] testCase4 = {"00:01", "00:01", "00:01", "00:01", "00:01"};
+		System.out.println("***** 정답 : " + getBusTime(1, 1, 5, testCase4));
+		System.out.println();System.out.println();
 
-        System.out.println(getJaccardSimilarity("aa1+aa2", "AAAA12"));
-        System.out.println();
+    	String[] testCase5 = {"23:59"};
+		System.out.println("***** 정답 : " + getBusTime(1, 1, 1, testCase5));
+		System.out.println();System.out.println();
 
-        System.out.println(getJaccardSimilarity("E=M*C^2", "e=m*c^2"));
-        System.out.println();
-
+    	String[] testCase6 = {"23:59","23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59"};
+		System.out.println("***** 정답 : " + getBusTime(10, 60, 45, testCase6));
+    	
     }
+    
+    public static String getBusTime(int 운행횟수, int 운행간격, int 수용인원, String[] timetable) throws ParseException {
 
-    public static int getJaccardSimilarity(String str1, String str2) {
+    	List<Date> timeArray = timetableToList(timetable);
+    	System.out.println(timeArray);
+    	
+    	String 마지막크루도착시간 = null;
+    	boolean 마지막버스만원여부 = false;
+    	int j = 0;
+		
+    	for (int i = 0; i < 운행횟수; i++) {
+    		String 버스출발시간 = 날짜가감기(첫번째버스시간, 운행간격 * i);
+    		int 현재인원 = 0;
+    		System.out.println("버스출발시간 : " + 버스출발시간);
+    		for (; j < timeArray.size(); j++) {
+    			
+    			if (sdf.parse(버스출발시간).compareTo(timeArray.get(j)) < 0 || 현재인원 == 수용인원) {
+    				if (현재인원 == 수용인원) {
+						마지막버스만원여부 = true;
+					}
+					break;
+				}
+				현재인원++;
+				마지막크루도착시간 = sdf.format(timeArray.get(j));
+				System.out.println(현재인원 + " : " + 마지막크루도착시간);
+			}
+		}
 
-        double answer = 1.;
+		System.out.println("마지막크루도착시간 : " + 마지막크루도착시간);
 
-//        System.out.println(getStringSet(str1));
-//        System.out.println(getStringSet(str2));
-//        System.out.println(getUnion(getStringSet(str1), getStringSet(str2)));
-//        System.out.println(getIntersection(getStringSet(str1), getStringSet(str2)));
+		String 정답;
+		if (마지막크루도착시간 == null || 마지막버스만원여부 == false) {
+			정답 = 날짜가감기(첫번째버스시간, 운행간격 * (운행횟수 - 1));
+		} else {
+			정답 = 날짜가감기(마지막크루도착시간, -1);
+		}
 
-        int uni = getUnion(getStringSet(str1), getStringSet(str2)).size();
-        int inter = getIntersection(getStringSet(str1), getStringSet(str2)).size();
-
-        if (uni == 0) { // 둘다 공집합
-            return (int)answer * 65536;
-        }
-        answer = Math.floor((double)inter / (double)uni * 65536);
-
-
-        return (int)answer;
+    	return 정답;
     }
-
-    public static List<String> getStringSet(String str) {
-
-
-        Pattern p = Pattern.compile("^([A-Z])([A-Z])$");
-
-        List<String> stringSet = new ArrayList<>();
-
-        if (str.length() > 1) {
-            for (int i = 0; i < str.length() - 1; i++) {
-
-                String element = str.substring(i, i + 2).toUpperCase();
-                Matcher m = p.matcher(element);
-                if (m.matches()) {
-                    stringSet.add(element);
-                }
-            }
-        }
-
-        return stringSet;
-
+    
+    public static String 날짜가감기(String time, int minute) throws ParseException {
+    	long t = sdf.parse(time).getTime() + minute * 1000 * 60;
+    	return sdf.format(new Date(t));
     }
+    
+    public static List<Date> timetableToList(String[] timetable) throws ParseException {
+    	List<Date> timeArray = new ArrayList<>();
+    	for (int i = 0; i < timetable.length; i++) {
+    		timeArray.add(sdf.parse(timetable[i]));
+		}
 
-    public static List<String> getUnion(List<String> set1, List<String> set2) {
-        List<String> unionSet = new ArrayList<>();
-        List<String> temp = new ArrayList<>();
-        unionSet.addAll(set1);
-        temp.addAll(set1);
+		Comparator<Date> c = Date::compareTo;
 
-        for (int i = 0; i < set2.size(); i++) {
-            if (temp.contains(set2.get(i))) {
-                temp.remove(set2.get(i));
-            } else {
-                unionSet.add(set2.get(i));
-            }
-        }
-        return unionSet;
-    }
-    public static List<String> getIntersection(List<String> set1, List<String> set2) {
-        List<String> interSet = new ArrayList<>();
-        List<String> temp = new ArrayList<>();
-        temp.addAll(set1);
-
-        for (int i = 0; i < set2.size(); i++) {
-            if (temp.contains(set2.get(i))) {
-                interSet.add(set2.get(i));
-                temp.remove(set2.get(i));
-            }
-        }
-        return interSet;
+//    	Comparator<Date> c1 = (o1, o2) -> o1.compareTo(o2);
+//    	Comparator<Date> c2 = new Comparator<Date>() {
+//			@Override
+//			public int compare(Date o1, Date o2) {
+//				return o1.compareTo(o2);
+//			}
+//		};
+    	timeArray.sort(c);
+    	
+    	return timeArray;
     }
 }
