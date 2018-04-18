@@ -1,4 +1,4 @@
-package step001.kao;
+package step001.kko;
 
 public class Temp {
 

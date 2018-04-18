@@ -1,4 +1,4 @@
-package step001.kao;
+package step001.kko;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package step001.kao.test;
+package step001.kko.test;
 import java.io.*;
 import java.math.*;
 import java.text.*;
