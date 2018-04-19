@@ -1,7 +1,6 @@
 package step001.singleton;
 
-import step001.singleton.s00.EagerInitialization;
-import step001.singleton.s01.StaticBlockInitalization;
+import step001.singleton.s04.InitializationOnDemandHolderIdiom;
 
 /**
  * @author : kohyusik
@@ -12,16 +11,19 @@ import step001.singleton.s01.StaticBlockInitalization;
 public class SingletonTest {
     
     public static void main(String[] args) {
-//        try {
-//            Class.forName("step001.singleton.s00.EagerInitialization2");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-    
-         EagerInitialization.getInstance().print();
-         EagerInitialization.getInstance().print();
-        StaticBlockInitalization.getInstance();
-    
+        
+        try {
+            Class.forName("step001.singleton.s04.InitializationOnDemandHolderIdiom");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+        //        EagerInitialization.getInstance().print();
+        //        EagerInitialization.getInstance().print();
+        //        StaticBlockInitalization.getInstance();
+        
+        InitializationOnDemandHolderIdiom.getInstance();
+        
     }
     
 }

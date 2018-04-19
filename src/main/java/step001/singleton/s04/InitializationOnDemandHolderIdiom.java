@@ -2,8 +2,17 @@ package step001.singleton.s04;
 
 public class InitializationOnDemandHolderIdiom {
 	
-	private InitializationOnDemandHolderIdiom () {}
+	static {
+		System.out.println("InitializationOnDemandHolderIdiom class load..");
+	}
+	private InitializationOnDemandHolderIdiom () {
+		System.out.println("InitializationOnDemandHolderIdiom load..");
+	}
+	
 	private static class Singleton {
+		static {
+			System.out.println("InitializationOnDemandHolderIdiom.Singleton class load..");
+		}
 		private static final InitializationOnDemandHolderIdiom instance = new InitializationOnDemandHolderIdiom();
 	}
 	
