@@ -5,6 +5,7 @@ package test;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.SecureRandom;
 
 /**
  * @author yusik
@@ -21,6 +22,8 @@ public class TestMain2 {
         System.out.println(file.getName());
         System.out.println(file.getPath());
         System.out.println(file.length());
+        SecureRandom sr = new SecureRandom();
+        System.out.println(sr.getAlgorithm());
     
 //        System.out.println(renamedFileName.substring(renamedFileName.lastIndexOf('$') + 1));
         
