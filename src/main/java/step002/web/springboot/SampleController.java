@@ -2,6 +2,7 @@ package step002.web.springboot;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,8 @@ public class SampleController {
     String main() {
         return "hello main!";
     }
-
+    
+    @CrossOrigin
     @RequestMapping("/execution")
     @ResponseBody
     String execution() {
