@@ -6,7 +6,7 @@
  */
 
 {
-    var ws = new WebSocket('ws://192.168.43.66:8080/ws.server');
+    var ws = new WebSocket('ws://localhost:9999/ws.server');
     ws.onmessage = function(e) {
         console.log(e.data);
     };
