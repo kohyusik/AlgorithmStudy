@@ -6,8 +6,12 @@ package step002.web.springboot;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 @Aspect
 public class AdviceLogging {
@@ -68,5 +72,48 @@ public class AdviceLogging {
         System.out.println("return value : " + String.valueOf(returnValue));
         return returnValue;
     }
+
+
+    @Around("@annotation(step002.web.annotation.ConvertTarget)")
+    public Object aroundConvert(ProceedingJoinPoint pjp) throws Throwable {
+
+        MethodSignature signature = (MethodSignature) pjp.getSignature();
+
+
+
+        Method method = signature.getMethod();
+
+        if ( method.getDeclaringClass().isInterface() ) {
+            method = pjp.getTarget().getClass().getDeclaredMethod(signature.getName(), method.getParameterTypes());
+        }
+
+
+        Annotation[][] annotations = method.getParameterAnnotations();
+
+        Object[] args = pjp.getArgs();
+
+        for ( int i=annotations.length-1 ; i>=0; i-- ) {
+
+//            args[i] = resolver.findConvertAnnotationsAndconvert(annotations[i], args[i]);
+        }
+
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        System.out.println(pjp);
+        System.out.println(method);
+        System.out.println(annotations);
+        System.out.println(args);
+        System.out.println(method.getDeclaredAnnotations()[0]);
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
+//        Object returnObj = pjp.proceed(args);
+//
+//        return resolver.findConvertAnnotationsAndconvert(method.getDeclaredAnnotations(), returnObj);
+
+        return null;
+    }
+
+
+
+
 
 }

@@ -68,17 +68,22 @@ public class TestMain {
 		ResponseEntity<Map> response = null;
 		HttpEntity<?> entity = new HttpEntity<>(new HttpHeaders());
 		RestTemplate restTemplate = new RestTemplate();
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("param1", "1234");
+		paramMap.put("param2", 314);
 		response = restTemplate.exchange(
-				uriStr, HttpMethod.GET, entity, Map.class, new HashMap<>());
+				"http://127.0.0.1:9999/test", HttpMethod.GET, entity, Map.class, paramMap);
 		
 		System.out.println(response);
-		ResponseEntity<Map> response2 = null;
-		response2 = restTemplate.exchange(
-				uri, HttpMethod.GET, entity, Map.class);
-		System.out.println(response2);
-		
-		System.out.println();
-		System.out.println(new URI("http://127.0.0.1:8080/test/{path1}"));
+
+//
+//		ResponseEntity<Map> response2 = null;
+//		response2 = restTemplate.exchange(
+//				uri, HttpMethod.GET, entity, Map.class);
+//		System.out.println(response2);
+//
+//		System.out.println();
+//		System.out.println(new URI("http://127.0.0.1:8080/test/{path1}"));
 		
 		
 	}

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
+import step002.web.annotation.ConvertTarget;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -24,7 +25,8 @@ public class SampleController {
     String main() {
         return "hello main!";
     }
-    
+
+    @ConvertTarget
     @CrossOrigin
     @RequestMapping("/execution")
     @ResponseBody
