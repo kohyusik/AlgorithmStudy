@@ -22,6 +22,7 @@ public class TestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
     
         System.out.println("OncePerRequestFilter...");
+//        if (true) throw new NullPointerException();
         filterChain.doFilter(request, response);
     }
 }

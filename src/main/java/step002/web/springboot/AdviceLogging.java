@@ -61,6 +61,11 @@ public class AdviceLogging {
         System.out.println("executionBefore");
     }
 
+    @Before("execution(* step002..*.*print(..))")
+    public void printBefore(JoinPoint joinPoint) {
+        System.out.println("print before");
+    }
+
     @After("execution(* step002..*.*execution(..))")
     public void executionAfter(JoinPoint joinPoint) {
         System.out.println("executionAfter");
@@ -79,8 +84,6 @@ public class AdviceLogging {
 
         MethodSignature signature = (MethodSignature) pjp.getSignature();
 
-
-
         Method method = signature.getMethod();
 
         if ( method.getDeclaringClass().isInterface() ) {
@@ -93,23 +96,36 @@ public class AdviceLogging {
         Object[] args = pjp.getArgs();
 
         for ( int i=annotations.length-1 ; i>=0; i-- ) {
+            System.out.println(annotations[i].length);
+            for (int j = 0; j < annotations[i].length; j++) {
+                if ("step002.web.annotation.ConvertTarget".equals(annotations[i][j].annotationType().getName())) {
+                    System.out.println(annotations[i][j]);
+                    System.out.println(annotations[i][j].annotationType().getName());
+                }
+            }
 
 //            args[i] = resolver.findConvertAnnotationsAndconvert(annotations[i], args[i]);
         }
 
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        if (true) throw new NullPointerException();
         System.out.println(pjp);
         System.out.println(method);
         System.out.println(annotations);
         System.out.println(args);
+        for (Object arg:args) {
+            System.out.println(arg);
+
+        }
         System.out.println(method.getDeclaredAnnotations()[0]);
+        System.out.println(method.getDeclaredAnnotations()[1]);
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
-//        Object returnObj = pjp.proceed(args);
+        Object returnObj = pjp.proceed(args);
 //
 //        return resolver.findConvertAnnotationsAndconvert(method.getDeclaredAnnotations(), returnObj);
 
-        return null;
+        return returnObj;
     }
 
 

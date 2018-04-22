@@ -2,21 +2,27 @@ package step002.web.springboot;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import step002.web.annotation.ConvertTarget;
+import step002.web.aop.proxy.ServiceTest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@Controller
+@RestController
 @EnableAutoConfiguration
 public class SampleController {
+
+    private final ServiceTest service;
+    public SampleController(ServiceTest service) {
+        this.service = service;
+        System.out.println("service!!!!!!!!!!!!!!!!!!!");
+        System.out.println(service.getClass() + "@");
+        System.out.println(this.getClass());
+    }
     
     Logger logger = Logger.getLogger("MyWebSocketHandler");
 
@@ -26,12 +32,19 @@ public class SampleController {
         return "hello main!";
     }
 
-    @ConvertTarget
     @CrossOrigin
     @RequestMapping("/execution")
     @ResponseBody
-    String execution() {
+    @ConvertTarget
+    String execution(HttpServletRequest request, @ConvertTarget String t1, String t2) {
         System.out.println("execution Controller!!");
+        String t1p = request.getParameter("t1");
+
+        System.out.println(t1);
+        System.out.println(t2);
+//
+//        if (true) throw new NullPointerException();
+
         return "execution!!!!a!";
     }
     
@@ -68,6 +81,5 @@ public class SampleController {
         result.put("sessionId", request.getAuthType());
         return result;
     }
-    
 
 }
