@@ -108,7 +108,7 @@ public class AdviceLogging {
         }
 
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        if (true) throw new NullPointerException();
+//        if (true) throw new NullPointerException();
         System.out.println(pjp);
         System.out.println(method);
         System.out.println(annotations);
