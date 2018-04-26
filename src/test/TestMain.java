@@ -20,6 +20,7 @@ public class TestMain {
 		test.add(51);
 		test.indexOf(1);
 		System.out.println(test);
+		
 	}
 
 }

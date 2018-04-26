@@ -11,7 +11,7 @@ import java.net.Socket;
 public class HttpServer {
 
 	public static void main(String[] args) throws IOException {
-
+	 
 		// server socket 생
 		int port = 1988;
 		ServerSocket serverSocket = new ServerSocket(port);
