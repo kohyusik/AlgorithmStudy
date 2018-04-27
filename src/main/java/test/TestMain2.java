@@ -3,12 +3,10 @@
  */
 package test;
 
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.ConnectException;
-import java.net.Socket;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.security.SecureRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,27 +17,25 @@ import java.util.regex.Pattern;
 public class TestMain2 {
     
     public static void main(String[] args) throws IOException {
+        
         String renamedFileName = "ABC_123_15";
-    
-//        File file = File.createTempFile("0javaTest", ".txt");
+        
+        //        File file = File.createTempFile("0javaTest", ".txt");
         File file = new File("C:\\git\\AlgorithmStudy\\src\\main\\webapp\\study\\reactjs\\react004.js");
-    
+        
         System.out.println(file.toURI());
         System.out.println(file.getName());
         System.out.println(file.getPath());
         System.out.println(file.length());
         SecureRandom sr = new SecureRandom();
         System.out.println(sr.getAlgorithm());
-
-
-
+        
         String EMAIL = "^[a-zA-Z0-9]+@[a-zA-Z0-9]*[.][a-zA-Z]*$";
         String MOBILE = "(01[012679])(d{3,4})(d{4})";
-
-
-        String EMAIL_PATTERN	= "^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$";
-        String PHONE_PATTERN	= "(01[016789])(\\d{3,4})(\\d{4})";
-
+        
+        String EMAIL_PATTERN = "^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$";
+        String PHONE_PATTERN = "(01[016789])(\\d{3,4})(\\d{4})";
+        
         Matcher m = Pattern.compile(EMAIL).matcher("@aa.a");
         System.out.println(m.matches());
         Matcher m2 = Pattern.compile(MOBILE).matcher("0101223450123");
@@ -48,7 +44,7 @@ public class TestMain2 {
         System.out.println(m3.matches());
         Matcher m4 = Pattern.compile(PHONE_PATTERN).matcher("01063757314");
         System.out.println(m4.matches());
-    
+   /*
         try {
             String serverIP = "127.0.0.1"; // 127.0.0.1 & localhost 본인
             System.out.println("서버에 연결중입니다. 서버 IP : " + serverIP);
@@ -73,11 +69,30 @@ public class TestMain2 {
             ie.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-        } // try - catch
-
-    
-//        System.out.println(renamedFileName.substring(renamedFileName.lastIndexOf('$') + 1));
+        }*/
+   
+   
         
+        try {
+            Class clazz = TestMain.class;
+            System.out.println(clazz.getDeclaredMethods());
+            Method method = clazz.getDeclaredMethod("refTest", String.class);
+            Method method2 = clazz.getDeclaredMethod("refTest", Integer.class);
+            Object ret = method.invoke(clazz.newInstance(), "TEST22");
+    
+            System.out.println(ret);
+            
+            
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+    
     }
     
 }

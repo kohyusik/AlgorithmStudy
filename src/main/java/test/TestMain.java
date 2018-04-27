@@ -111,6 +111,11 @@ public class TestMain {
 		
 		System.out.println(type.getType());
 	}
+	
+	public String refTest(String test){
+		return test;
+	}
+	
 
 }
 
