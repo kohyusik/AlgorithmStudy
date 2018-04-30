@@ -12,13 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.*;
+import java.util.*;
 
 /**
  * @author yusik
@@ -27,7 +22,8 @@ import java.util.Map;
 public class TestMain {
 
 	public static void main(String[] args) throws URISyntaxException {
-
+		
+		System.out.println(getLocalServerIp());
 		ArrayList<Integer> test = new ArrayList<Integer>();
 //		ParameterizedTypeReference<CommonResponse<List<T>>> responseType =
 //				ParameterizedTypeReferenceBuilder.fromTypeToken(
@@ -114,6 +110,25 @@ public class TestMain {
 	
 	public String refTest(String test){
 		return test;
+	}
+	
+	private static String getLocalServerIp() {
+		
+		try {
+			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+				NetworkInterface intf = en.nextElement();
+				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+					InetAddress inetAddress = enumIpAddr.nextElement();
+					System.out.println(inetAddress.getHostAddress());
+					if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress.isSiteLocalAddress()) {
+						return inetAddress.getHostAddress();
+					}
+				}
+			}
+		} catch (SocketException ex) {
+			ex.printStackTrace();
+		}
+		return null;
 	}
 	
 
