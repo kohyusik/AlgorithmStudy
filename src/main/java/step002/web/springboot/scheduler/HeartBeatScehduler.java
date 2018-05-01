@@ -2,9 +2,9 @@ package step002.web.springboot.scheduler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import step002.web.domain.ServerInfo;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -16,15 +16,27 @@ public class HeartBeatScehduler {
     @Autowired
     RedisTemplate redisTemplate;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5 * 60 * 1000)
     public void heartBeat() {
 
-        String thisIpAddress = "";
         try {
 
-		    System.out.println("REDIS INSERT");
-            thisIpAddress = InetAddress.getLocalHost().getHostAddress();
-            redisTemplate.opsForValue().set("spring:websocket:server:list", thisIpAddress, 3, TimeUnit.SECONDS);
+		    ServerInfo serverInfo = new ServerInfo();
+		    serverInfo.setHostName(InetAddress.getLocalHost().getHostName());
+		    serverInfo.setServerIP(InetAddress.getLocalHost().getHostAddress());
+
+            System.out.println("Redis set server info : " + serverInfo);
+            redisTemplate.opsForValue().set("spring:websocket:server:list", serverInfo, 300, TimeUnit.SECONDS);
+
+            Object obj = redisTemplate.opsForValue().get("spring:websocket:server:list");
+            System.out.println(obj.getClass());
+            System.out.println(obj);
+            System.out.println(redisTemplate.keys("spring:websocket:server*"));
+
+            for (Object key:redisTemplate.keys("spring:websocket:server*")) {
+                System.out.println(key);
+                System.out.println(redisTemplate.opsForValue().get(key));
+            }
 
 
         } catch (UnknownHostException e) {

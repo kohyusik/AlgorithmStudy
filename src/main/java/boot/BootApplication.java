@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @ServletComponentScan({"step002.web.filter"})
 @ComponentScan({"step002.*", "boot"})
+@EnableScheduling
 public class BootApplication {
     public static void main(String[] args) {
 //        HashMap<String, Object> properties = new HashMap<>();
