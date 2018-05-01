@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -26,7 +27,9 @@ import java.util.Map;
  */
 public class TestMain {
 
-	public static void main(String[] args) throws URISyntaxException {
+	public static void main(String[] args) throws Exception {
+
+		System.out.println(InetAddress.getLocalHost().getHostAddress());
 
 		ArrayList<Integer> test = new ArrayList<Integer>();
 //		ParameterizedTypeReference<CommonResponse<List<T>>> responseType =
