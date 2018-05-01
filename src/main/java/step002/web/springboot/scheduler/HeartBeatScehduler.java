@@ -29,8 +29,9 @@ public class HeartBeatScehduler {
             redisTemplate.opsForValue().set("spring:websocket:server:list", serverInfo, 300, TimeUnit.SECONDS);
 
             Object obj = redisTemplate.opsForValue().get("spring:websocket:server:list");
-            System.out.println(obj.getClass());
-            System.out.println(obj);
+            ServerInfo getSi = (ServerInfo)obj;
+            System.out.println(getSi.equals(serverInfo));
+            System.out.println(getSi == serverInfo);
             System.out.println(redisTemplate.keys("spring:websocket:server*"));
 
             for (Object key:redisTemplate.keys("spring:websocket:server*")) {
