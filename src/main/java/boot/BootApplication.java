@@ -4,10 +4,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ServletComponentScan({"step002.web.filter"})
 @ComponentScan({"step002.*", "boot"})
+@EnableScheduling
 public class BootApplication {
     public static void main(String[] args) {
 //        HashMap<String, Object> properties = new HashMap<>();
