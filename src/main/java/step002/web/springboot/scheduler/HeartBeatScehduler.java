@@ -11,7 +11,6 @@ import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 @Component
-@EnableScheduling
 public class HeartBeatScehduler {
 
     @Autowired

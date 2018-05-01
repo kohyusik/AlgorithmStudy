@@ -34,6 +34,7 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addInterceptor(testInterceptor)
                 .addPathPatterns("/**/*");
     }
+
     @Bean
     public TaskScheduler taskScheduler() {
         return new ConcurrentTaskScheduler(Executors.newSingleThreadScheduledExecutor());
