@@ -13,12 +13,18 @@ import java.util.Enumeration;
  */
 public class Test {
     
-    public static void main(String[] args) throws SocketException {
+    public static void main(String[] args) throws Exception {
     
         String ip = getLocalServerIp();
         System.out.println(">>>");
         System.out.println(ip);
-        Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
+        System.out.println(InetAddress.getLocalHost().getHostName());
+        InetAddress local = InetAddress.getLocalHost();
+    
+        String ipa = local.getHostAddress();
+    
+        System.out.println(">>>");
+        System.out.println(ipa);
         
     }
     private static String getLocalServerIp() {

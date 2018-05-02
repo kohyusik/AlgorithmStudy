@@ -1,4 +1,4 @@
-package step001.kao.test04;
+package step001.kko.test04;
 
 public class Solution {
 

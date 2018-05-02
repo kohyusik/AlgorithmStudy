@@ -21,9 +21,10 @@ import java.util.*;
  */
 public class TestMain {
 
-	public static void main(String[] args) throws URISyntaxException {
-		
-		System.out.println(getLocalServerIp());
+	public static void main(String[] args) throws Exception {
+
+		System.out.println(InetAddress.getLocalHost().getHostAddress());
+
 		ArrayList<Integer> test = new ArrayList<Integer>();
 //		ParameterizedTypeReference<CommonResponse<List<T>>> responseType =
 //				ParameterizedTypeReferenceBuilder.fromTypeToken(
