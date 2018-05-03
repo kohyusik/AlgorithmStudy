@@ -24,6 +24,8 @@ public class Test {
         String ipa = local.getHostAddress();
     
         System.out.println(">>>");
+        System.out.println(local);
+        System.out.println(local.getHostName());
         System.out.println(ipa);
         
     }
