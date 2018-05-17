@@ -1,5 +1,6 @@
 package test;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -14,6 +15,13 @@ import java.util.Enumeration;
 public class Test {
     
     public static void main(String[] args) throws Exception {
+        
+        String filePath = "k\\kohyusik/diek/kajwe.png";
+        
+        String rep = filePath.replace('\\','/');
+        System.out.println(filePath);
+        System.out.println(rep);
+        System.out.println(new File("D:\\server_app\\files\\thumbnail\\k\\kohyusik\\39c63921-7934-46ec-b4fd-42beeec1b807.png").toURI());
     
         String ip = getLocalServerIp();
         System.out.println(">>>");
