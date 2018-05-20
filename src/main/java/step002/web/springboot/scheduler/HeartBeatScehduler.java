@@ -2,6 +2,7 @@ package step002.web.springboot.scheduler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import step002.web.domain.ServerInfo;
@@ -13,10 +14,11 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class HeartBeatScehduler {
 
+
     @Autowired
     RedisTemplate redisTemplate;
 
-    @Scheduled(fixedRate = 5 * 60 * 1000)
+//    @Scheduled(fixedRate = 5 * 60 * 1000)
     public void heartBeat() {
 
         try {
