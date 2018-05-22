@@ -1,6 +1,7 @@
 package step002.web.springboot;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -80,6 +81,22 @@ public class SampleController {
         result.put("querystring", request.getQueryString());
         result.put("sessionId", request.getAuthType());
         return result;
+    }
+
+    @RequestMapping(value = "/postTest", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public Map postTest(
+//            @RequestParam(value = "api1", required = true) String api1,
+//            @RequestParam(value = "api2", required = true) String api2
+//            @RequestBody Map api1,
+            @RequestBody TestClass<TestClass.TestInnerClass> body
+    ) {
+
+//        System.out.println(api1.toString());
+        System.out.println(body);
+        System.out.println(body.getApi3());
+
+        return new HashMap();
     }
 
 }
