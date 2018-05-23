@@ -22,6 +22,10 @@ public class TestMain2 {
         
         //        File file = File.createTempFile("0javaTest", ".txt");
         File file = new File("C:\\git\\AlgorithmStudy\\src\\main\\webapp\\study\\reactjs\\react004.js");
+    
+        System.out.println(file.canRead());
+        System.out.println(file.canWrite());
+        System.out.println(file.canExecute());
         
         System.out.println(file.toURI());
         System.out.println(file.getName());
