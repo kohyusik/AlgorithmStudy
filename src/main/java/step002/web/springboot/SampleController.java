@@ -1,8 +1,6 @@
 package step002.web.springboot;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import step002.web.annotation.ConvertTarget;
@@ -48,6 +46,40 @@ public class SampleController {
 
         return "execution!!!!a!";
     }
+    
+    @RequestMapping(value = "/testList", method = { RequestMethod.GET })
+    @ResponseBody
+    public Map test(HttpServletRequest request, String[] paramList) {
+    
+        System.out.println("************ TEST ************");
+        
+        for (int i = 0; i < paramList.length; i++) {
+            System.out.println(paramList[i]);
+        }
+//        paramList.forEach((str) -> System.out.println(str));
+    
+        Map<String, String> result = new HashMap<>();
+        result.put("request", request.getRequestURI());
+        result.put("querystring", request.getQueryString());
+        result.put("sessionId", request.getAuthType());
+        return result;
+    }
+    
+//    @RequestMapping(value = "/testListJson", method = { RequestMethod.GET })
+//    @ResponseBody
+//    public Map testListJson(HttpServletRequest request, @RequestBody String[] paramList) {
+//
+//        System.out.println("************ TEST ************");
+//
+//        for (int i = 0; i < paramList.length; i++) {
+//            System.out.println(paramList[i]);
+//        }
+////        paramList.forEach((str) -> System.out.println(str));
+//
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("request", paramList);
+//        return result;
+//    }
     
     @RequestMapping(value = "/test", method = { RequestMethod.GET })
     @ResponseBody
