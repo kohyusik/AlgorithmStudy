@@ -10,26 +10,20 @@ import java.io.IOException;
  */
 public class TestMain2 {
     
+    public TestMain2() {
+        System.out.println("TestMain2 const");
+    }
+    
     public static void main(String[] args) throws IOException {
     
-        System.out.println(22);
-        
         Class clazz = Object.class;
-        
         Class supClazz =clazz.getSuperclass();
         System.out.println(clazz);
         System.out.println(clazz == Object.class);
         System.out.println(supClazz);
     
-    
-        StringBuffer baseUrl = new StringBuffer("http://localhost:8080/test/test2/test3");
-        baseUrl.delete(baseUrl.indexOf("/test/test2/test3"), baseUrl.length());
-        System.out.println(baseUrl);
-        
-        
-        
-        
-        
+        TestMain2 innerInnerClass = InnerTestClass.getInstance();
+        System.out.println(innerInnerClass);
         
         /*
         String renamedFileName = "ABC_123_15";
@@ -111,6 +105,25 @@ public class TestMain2 {
             e.printStackTrace();
         }
     */
+    }
+    
+    public static class InnerTestClass extends TestMain2{
+        
+        public static InnerTestClass getInstance(){
+            InnerInnerClass in = new InnerInnerClass();
+            System.out.println(in);
+            return new InnerTestClass();
+        }
+    
+        public InnerTestClass() {
+            System.out.println("InnerTestClass const");
+        }
+    
+        public static class InnerInnerClass {
+            public InnerInnerClass() {
+                System.out.println("InnerInnerClass const");
+            }
+        }
     }
     
 }

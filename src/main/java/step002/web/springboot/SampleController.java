@@ -1,5 +1,6 @@
 package step002.web.springboot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,6 +17,8 @@ import java.util.logging.Logger;
 public class SampleController {
 
     private final ServiceTest service;
+    
+    @Autowired
     public SampleController(ServiceTest service) {
         this.service = service;
         System.out.println("service!!!!!!!!!!!!!!!!!!!");

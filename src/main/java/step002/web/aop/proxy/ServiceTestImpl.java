@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 @Service
 @EnableAutoConfiguration
 public class ServiceTestImpl implements ServiceTest {
+  
+  public ServiceTestImpl() {
+  
+    System.out.println("ServiceTestImpl instance..");
+  }
+  
   @Async
   public void print() {
   }
