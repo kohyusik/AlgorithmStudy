@@ -4,6 +4,8 @@
 package test;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author yusik
@@ -24,7 +26,12 @@ public class TestMain2 {
     
         TestMain2 innerInnerClass = InnerTestClass.getInstance();
         System.out.println(innerInnerClass);
+    
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+        System.out.println(sdf.format(new Date()));
+        System.out.println(sdf.getTimeZone());
         
+    
         /*
         String renamedFileName = "ABC_123_15";
     
