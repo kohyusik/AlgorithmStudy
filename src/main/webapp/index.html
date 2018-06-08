@@ -12,10 +12,17 @@
 <script>
 
     console.log('started');
-    var current = moment().tz('Asia/Seoul').format('L hh:mm A');
+    let current = moment().tz('Asia/Seoul').format('L hh:mm A');
     console.log(current);
     current = moment().tz('US/Pacific').format('L hh:mm A');
-    console.log(current);
+
+    let testTime1 = moment('02:00 PM', 'hh:mm A');
+    let testTime2 = moment('03:00 PM', 'hh:mm A');
+    let testTime3 = moment('09:00 AM', 'hh:mm A');
+
+    console.log('testTime1.isAfter(testTime2)', testTime1.isBefore(testTime2));
+    console.log('testTime2.isAfter(testTime3)', testTime2.isBefore(testTime3));
+    console.log('testTime2.isAfter(testTime3)', testTime2.isBefore(null));
 
 </script>
 
