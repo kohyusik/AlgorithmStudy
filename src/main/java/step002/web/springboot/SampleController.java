@@ -30,7 +30,12 @@ public class SampleController {
 
     @RequestMapping("/")
     @ResponseBody
-    String main() {
+    String main(HttpServletRequest request) {
+    
+        System.out.println("@@@@@@");
+        System.out.println(request.getRequestURI());
+        System.out.println(request.getRequestURL());
+        System.out.println(request.getServletPath());
         return "hello main!";
     }
 
@@ -50,7 +55,7 @@ public class SampleController {
         return "execution!!!!a!";
     }
     
-    @RequestMapping(value = "/testList", method = { RequestMethod.GET })
+    @RequestMapping(value = "/testList/t", method = { RequestMethod.GET })
     @ResponseBody
     public Map test(HttpServletRequest request, String[] paramList) {
     
