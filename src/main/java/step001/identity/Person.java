@@ -67,6 +67,10 @@ public class Person {
         map.put(p1, 1);
         map.put(p2, 1);
         System.out.println(map.size()); // 2
+        Map<Person, Integer> map2 = new HashMap<Person, Integer>();
+        map.put(p1, 2);
+        map.put(p2, 2);
+        System.out.println(map.size()); // 2
 
 
     }
