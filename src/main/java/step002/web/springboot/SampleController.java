@@ -66,8 +66,9 @@ public class SampleController {
         }
 //        paramList.forEach((str) -> System.out.println(str));
     
-        Map<String, String> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         result.put("request", request.getRequestURI());
+        result.put("request index", request.getRequestURI().indexOf("massMonth"));
         result.put("querystring", request.getQueryString());
         result.put("sessionId", request.getAuthType());
         return result;
