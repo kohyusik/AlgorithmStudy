@@ -13,7 +13,6 @@ public class ExceptionController {
 
   @ExceptionHandler(NullPointerException.class)
   public String handle(Exception e) {
-    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     System.out.println(e);
     return null;
   }
