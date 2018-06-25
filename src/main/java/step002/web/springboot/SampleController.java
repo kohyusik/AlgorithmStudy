@@ -2,12 +2,18 @@ package step002.web.springboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import step002.web.annotation.ConvertTarget;
 import step002.web.aop.proxy.ServiceTest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -139,5 +145,49 @@ public class SampleController {
 
         return new HashMap();
     }
+    
+    @Autowired
+    ResourceLoader resourceLoader;
+    
+    @PostMapping("/downloadFile")
+    @CrossOrigin
+    public ResponseEntity<Resource> downloadFile(
+            @RequestBody String param,
+            //            @PathVariable String fileName,
+            HttpServletRequest request) {
+        // Load file as Resource
+        //        Resource resource = fileStorageService.loadFileAsResource(fileName);
+        
+        // local
+        Resource resource = resourceLoader.getResource("file:D:\\server_app\\files\\blast\\k\\kohyusik\\Code-128.jpg");
+        
+        // url
+        //        Resource resource = resourceLoader.getResource("https://dev-platform.trumpia.com/files/blast/k/kohyusik/15296644922161$Qhyun1_jpg.jpg");
+        
+        System.out.println(param);
+        //        System.out.println(param.get("fileName"));
+        //        System.out.println(param.get("url"));
+        
+        
+        
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+        
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+        
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+    
 
 }
