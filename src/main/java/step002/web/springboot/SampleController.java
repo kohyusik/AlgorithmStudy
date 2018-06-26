@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import step002.web.annotation.ConvertTarget;
 import step002.web.aop.proxy.ServiceTest;
+import step002.web.domain.DownloadFileInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -152,22 +153,17 @@ public class SampleController {
     @PostMapping("/downloadFile")
     @CrossOrigin
     public ResponseEntity<Resource> downloadFile(
-            @RequestBody String param,
+            @RequestBody DownloadFileInfo param,
             //            @PathVariable String fileName,
             HttpServletRequest request) {
         // Load file as Resource
         //        Resource resource = fileStorageService.loadFileAsResource(fileName);
         
-        // local
+        // from local file
         Resource resource = resourceLoader.getResource("file:D:\\server_app\\files\\blast\\k\\kohyusik\\Code-128.jpg");
         
-        // url
+        // from file url
         //        Resource resource = resourceLoader.getResource("https://dev-platform.trumpia.com/files/blast/k/kohyusik/15296644922161$Qhyun1_jpg.jpg");
-        
-        System.out.println(param);
-        //        System.out.println(param.get("fileName"));
-        //        System.out.println(param.get("url"));
-        
         
         
         // Try to determine file's content type
