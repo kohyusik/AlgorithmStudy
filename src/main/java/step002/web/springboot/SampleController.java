@@ -102,6 +102,7 @@ public class SampleController {
     public Map test(HttpServletRequest request) {
         
         logger.fine("************ TEST ************");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
         Map<String, String> pathVal = new HashMap<>();
         pathVal.put("test1", "path1");
