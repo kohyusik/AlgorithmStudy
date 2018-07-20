@@ -14,7 +14,9 @@ public class HttpWebsocketServer {
 		// server socket 생
 		int port = 1988;
 		String type = "HTTP";
-		String key = "HTTP";
+		String key = "";
+		final String WS_MAGIC_STRING = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+		
 		ServerSocket serverSocket = new ServerSocket(port);
 		System.out.println("port number : " + port);
 
@@ -81,7 +83,7 @@ public class HttpWebsocketServer {
 				
 			} else/* if ("websocket".equals(type))*/ {
 				System.out.println("[WebSocket]");
-				String unique = key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+				String unique = key + WS_MAGIC_STRING;
 				MessageDigest md = MessageDigest.getInstance("SHA-1"); // 이 부분을 SHA-256, MD5로만 바꿔주면 된다.
 				md.update(unique.getBytes()); // "세이프123"을 SHA-1으로 변환할 예정!
 				
@@ -102,13 +104,57 @@ public class HttpWebsocketServer {
 				out.write("Upgrade: websocket\r\n");
 				out.write("Connection: Upgrade\r\n");
 				out.write("Sec-WebSocket-Accept: " + accHd + "\r\n");
+				out.write("Sec-WebSocket-Extensions: permessage-deflate;client_max_window_bits=15" + "\r\n");
 //				out.write("Sec-WebSocket-Accept: " + "WXVjpcIMh5mK8bApeONPlq2DEHA=" + "\r\n");
 				out.write("\r\n");
 				
 				System.out.println("통신 끝");
-				out.close();
-				in.close();
-				clientSocket.close();
+				
+				out.write(0x81);
+				out.write(0x4);
+//				out.write('t');
+				out.flush();
+				
+				char[] cbuf = new char[1000];
+				while (true) {
+					int r = in.read(cbuf);
+//					out.write('t');
+//					out.write('e');
+//					out.write('s');
+//					out.flush();
+					for (int i = 0; i < r; i++) {
+						System.out.println(cbuf[i]);
+					}
+				}
+				
+//				Runnable t1 = () -> {
+//					try {
+//						while (true) {
+//							int r = in.read();
+//							System.out.println(r);
+//							out.write('t');
+//							out.write('e');
+//							out.write('s');
+//							out.flush();
+//						}
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				};
+//
+//				Thread t = new Thread(t1);
+//				t.start();
+//				out.close();
+//				in.close();
+//				clientSocket.close();
+//				while ((line = in.readLine()) != null) {
+//					System.out.print(seq++ + " : ");
+//					System.out.println(line);
+//					if (line.isEmpty()) {
+//						break;
+//					}
+//				}
+
 			}
 		}
 	}
