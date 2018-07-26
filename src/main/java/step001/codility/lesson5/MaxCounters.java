@@ -1,0 +1,61 @@
+package step001.codility.lesson5;
+
+/**
+ * @author : kohyusik
+ * @version : 1.0
+ * @date : 2018-07-26
+ * @description :
+ */
+
+public class MaxCounters {
+    
+    public static void main(String[] args) {
+        MaxCounters maxCounters = new MaxCounters();
+    
+        // test case 1
+        int n1 = 5;
+        int[] input1 = new int[] {3, 4, 4, 6, 1, 4, 4};
+        System.out.println("N : " + n1);
+        System.out.print("arr : ");
+        printArray(input1);
+        int[] counter = maxCounters.solution(n1, input1);
+    
+        printArray(counter);
+        
+    }
+    
+    public int[] solution(int N, int[] A) {
+        int max = 0;
+        int[] counter = new int[N];
+        
+        for(int i = 0; i < A.length; i++) {
+            if (A[i] >= 1 && A[i] <= N) {
+                counter[A[i] - 1] += 1;
+                
+                // set max
+                if (counter[A[i] - 1] > max) {
+                    max = counter[A[i] - 1];
+                }
+            } else if (A[i] == N + 1) {
+                for(int j = 0; j < counter.length; j++) {
+                    counter[j] = max;
+                }
+            }
+        }
+        
+        return counter;
+    }
+    
+    public static void printArray(int[] array) {
+        System.out.print("{ ");
+        for(int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i != array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println(" }");
+    }
+    
+    
+}
