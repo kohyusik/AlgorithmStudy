@@ -4,10 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
  
 public class KMP {
- 
+    
     private String string;
  
     private String pattern;
+    
+    static int cnt = 0;
+    
+    public static void main(String[] args) {
+        KMP kmp = new KMP("AAABCABZABCCBCABCABXABCABDIBCZ", "ABCABD");
+        System.out.println(kmp.search());
+        System.out.println(cnt);
+    }
  
     /**
      * 길이가 N 인 문자열 S(string) 에서 길이가 M 인 문자열 P(pattern) 를 탐색한다.<br/>
@@ -44,7 +52,7 @@ public class KMP {
  
         for (int i = 0; i < n; i++) {
             while (j > 0 && s[i] != p[j]) {// j > 0 : 한 글자 라도 일치한 것이 있는지
-                j = pi[j - 1];
+                j = pi[j - 1];cnt++;
             }
             if (s[i] == p[j]) {
                 if (j == m - 1) {
@@ -83,6 +91,3 @@ public class KMP {
         return pi;
     }
 }
-
-
-출처: http://hskimsky.tistory.com/122 [왕초보 프로그래머 Sky]

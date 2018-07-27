@@ -33,23 +33,27 @@ public class MaxCounters {
         int adder = 0;
         int[] counter = new int[N];
         
-        for(int i = 0, l1 = A.length; i < l1; i++) {
+        for (int i = 0, l1 = A.length; i < l1; i++) {
             int n = A[i];
-            if (n >= 1 && n <= N) {
+    
+            if (n == N + 1) {
+                
+                adder += max;
+                max = 0;
+                counter = new int[N];
+                
+            } else {
+                
                 counter[n - 1] += 1;
                 
                 // set max
                 if (counter[n - 1] > max) {
                     max = counter[n - 1];
                 }
-            } else if (n == N + 1) {
-                adder += max;
-                max = 0;
-                counter = new int[N];
             }
         }
     
-        for(int j = 0, l2 = counter.length; j < l2; j++) {
+        for (int j = 0, l2 = counter.length; j < l2; j++) {
             counter[j] += adder;
         }
         

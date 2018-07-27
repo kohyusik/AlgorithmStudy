@@ -8,21 +8,24 @@ package step001.string.search;
  */
 public class BruteForce {
     
-    public static void main(String[] args) {
-        String total = "ZABCCBCABCABXABCABDIBCZ"; // 23
-        String search = "ABCABD"; // 6
+    static int cnt = 0;
     
-        int test = total.indexOf(search);
+    public static void main(String[] args) {
+        String string = "AAABCABZABCCBCABCABXABCABDIBCZ"; // length : 30
+        String pattern = "ABCABD"; // length : 6
+    
+        int test = string.indexOf(pattern);
         System.out.println(test);
     
-        int test2 = searchString(total, search);
+        int test2 = searchString(string, pattern);
         System.out.println(test2);
+        System.out.println(cnt);
         
     }
     
-    public static int searchString(String text, String search) {
-        char[] source = text.toCharArray();
-        char[] target = search.toCharArray();
+    public static int searchString(String string, String pattern) {
+        char[] source = string.toCharArray();
+        char[] target = pattern.toCharArray();
         int posSource = 0;
         int result = -1;
         
@@ -32,6 +35,7 @@ public class BruteForce {
             if (source[posSource] == target[posTarget]) {
     
                 for (; posTarget < target.length; posSource++, posTarget++) {
+                    cnt++;
                     if (source[posSource] != target[posTarget]) {
                         break;
                     }
