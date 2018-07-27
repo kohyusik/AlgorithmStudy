@@ -15,6 +15,10 @@ public class MaxCounters {
         // test case 1
         int n1 = 5;
         int[] input1 = new int[] {3, 4, 4, 6, 1, 4, 4};
+//        int n1 = 5;
+//        int[] input1 = new int[] {1, 6, 6, 6, 6, 6, 6};
+//        int n1 = 1;
+//        int[] input1 = new int[] {2, 1, 1};
         System.out.println("N : " + n1);
         System.out.print("arr : ");
         printArray(input1);
@@ -26,6 +30,7 @@ public class MaxCounters {
     
     public int[] solution(int N, int[] A) {
         int max = 0;
+        int adder = 0;
         int[] counter = new int[N];
         
         for(int i = 0; i < A.length; i++) {
@@ -37,10 +42,14 @@ public class MaxCounters {
                     max = counter[A[i] - 1];
                 }
             } else if (A[i] == N + 1) {
-                for(int j = 0; j < counter.length; j++) {
-                    counter[j] = max;
-                }
+                adder += max;
+                max = 0;
+                counter = new int[N];
             }
+        }
+    
+        for(int j = 0; j < counter.length; j++) {
+            counter[j] += adder;
         }
         
         return counter;
