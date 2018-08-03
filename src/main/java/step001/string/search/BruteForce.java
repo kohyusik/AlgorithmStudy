@@ -1,5 +1,7 @@
 package step001.string.search;
 
+import org.springframework.util.StringUtils;
+
 /**
  * @author : kohyusik
  * @version : 1.0
@@ -20,6 +22,9 @@ public class BruteForce {
         int test2 = searchString(string, pattern);
         System.out.println(test2);
         System.out.println(cnt);
+    
+        String atest = StringUtils.
+        System.out.println(atest);
         
     }
     
