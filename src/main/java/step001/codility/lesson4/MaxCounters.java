@@ -1,4 +1,4 @@
-package step001.codility.lesson5;
+package step001.codility.lesson4;
 
 /**
  * @author : kohyusik
