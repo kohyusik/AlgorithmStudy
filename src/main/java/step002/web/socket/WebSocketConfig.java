@@ -1,28 +1,35 @@
 package step002.web.socket;
 
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
+//@Configuration
+//@EnableWebSocket
+@EnableWebSocketMessageBroker
 @Configuration
-@EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
-
+public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-
-        registry.addHandler(myHandler(), "/ws.server")
-//                .addInterceptors(new HttpSessionHandshakeInterceptor())
-                .setAllowedOrigins("*");
-
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        
+        registry.addEndpoint("/ws")
+                //                .setHandshakeHandler(new DefaultHandshakeHandler(new TomcatRequestUpgradeStrategy()))
+                .setAllowedOrigins("*").withSockJS();
     }
-
-    @Bean
-    public WebSocketHandler myHandler() {
-        return new MyWebSocketHandler();
+    
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        
+        // simple stomp broker (in memory)
+        config.enableSimpleBroker("/topic");
+        
+        // stomp broker (using memory DB)
+        /*config.enableStompBrokerRelay("/topic", "/user")
+                .setRelayHost("192.168.2.134").setRelayPort(61613) // activemq
+                .setSystemHeartbeatSendInterval(10000).setSystemHeartbeatReceiveInterval(10000);*/
+        
+        config.setApplicationDestinationPrefixes("/app");
     }
 }
