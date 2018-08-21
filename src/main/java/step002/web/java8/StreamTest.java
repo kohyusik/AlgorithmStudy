@@ -2,7 +2,6 @@ package step002.web.java8;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author : kohyusik
@@ -25,10 +24,7 @@ public class StreamTest {
                 .sorted()
                 .forEach(System.out::println);
     
-        System.out.println(myList.hashCode());
-        System.out.println(Objects.hash("kohyusik"));
-        System.out.println("kohyusik".hashCode());
-        
+        System.out.println(myList);
     }
     
 }
