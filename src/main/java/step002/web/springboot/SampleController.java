@@ -36,7 +36,6 @@ public class SampleController {
     Logger logger = Logger.getLogger("MyWebSocketHandler");
 
     @RequestMapping("/")
-    @ResponseBody
     String main(HttpServletRequest request) {
     
         System.out.println("@@@@@@");
@@ -48,7 +47,6 @@ public class SampleController {
 
     @CrossOrigin
     @RequestMapping("/execution")
-    @ResponseBody
     @ConvertTarget
     String execution(HttpServletRequest request, @ConvertTarget String t1, String t2) {
         System.out.println("execution Controller!!");
@@ -63,7 +61,6 @@ public class SampleController {
     }
     
     @RequestMapping(value = "/testList/t", method = { RequestMethod.GET })
-    @ResponseBody
     public Map test(HttpServletRequest request, String[] paramList) {
     
         System.out.println("************ TEST ************");
@@ -98,7 +95,6 @@ public class SampleController {
 //    }
     
     @RequestMapping(value = "/test", method = { RequestMethod.GET })
-    @ResponseBody
     public Map test(HttpServletRequest request) {
         
         logger.fine("************ TEST ************");
@@ -133,7 +129,6 @@ public class SampleController {
     }
 
     @RequestMapping(value = "/postTest", method = {RequestMethod.POST, RequestMethod.GET})
-    @ResponseBody
     public Map postTest(
 //            @RequestParam(value = "api1", required = true) String api1,
 //            @RequestParam(value = "api2", required = true) String api2

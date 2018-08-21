@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery data() vs HTML5 dataset</title>
+    <!--<script src="/resources/script/lib/jquery-3.3.1.js"></script>-->
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="test" data-test="html">
+    <h3>test</h3>
+</div>
+<script>
+
+    // JQuery data()
+    debugger;
+    let $test = $('.test');
+    // $test.data('test', 'jquery');
+    debugger;
+    let jqueryData = $test.data('test'); // 처음에 내부 객체에 data가 없으면 속성 getAttribute(data-test) 값을 가져와 내부에 저장하고 해당 값을 리턴
+    console.log(jqueryData);
+    debugger;
+    jqueryData = $test.data('test'); // 위에서 세팅 된 값을 가져옴
+
+    // HTML5 dataset
+    let htmlData = document.querySelector('.test').dataset.test;
+    console.log(htmlData);
+
+</script>
+</body>
+</html>

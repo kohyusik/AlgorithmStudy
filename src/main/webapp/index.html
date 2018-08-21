@@ -7,8 +7,11 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.17/moment-timezone-with-data.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.17/moment-timezone-with-data.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 </head>
 <body>
+<div><button id="btnSnd">TEST</button></div>
 <script>
 
     console.log('started');
@@ -23,14 +26,30 @@
     console.log('testTime1.isAfter(testTime2)', testTime1.isBefore(testTime2));
     console.log('testTime2.isAfter(testTime3)', testTime2.isBefore(testTime3));
     console.log('testTime2.isAfter(testTime3)', testTime2.isBefore(null));
-s
 
     let testM = moment('06/21/2018 09:00 AM', 'L hh:mm A');
     console.log('testM', testM.format('L'));
 
-</script>
 
-test2125125212412422
+    var sock = new SockJS("/ws");
+    var client = Stomp.over(sock); // 1. SockJS를 내부에 들고 있는 client를 내어준다.
+
+    // 2. connection이 맺어지면 실행된다.
+    client.connect({}, function () {
+        // 3. send(path, header, message)로 메시지를 보낼 수 있다.
+        client.send('/app/chat', {}, JSON.stringify({chatRoomId: 1234, writer: 'koh'}));
+        // 4. subscribe(path, callback)로 메시지를 받을 수 있다. callback 첫번째 파라미터의 body로 메시지의 내용이 들어온다.
+        client.subscribe('/topic/chat', function (chat) {
+            console.log(chat);
+        });
+    });
+
+    document.querySelector("#btnSnd").addEventListener('click', function () {
+        client.send('/app/chat', {}, JSON.stringify({chatRoomId: 1234, message: '1234', writer: ''}));
+    });
+
+
+</script>
 
 </body>
 </html>
