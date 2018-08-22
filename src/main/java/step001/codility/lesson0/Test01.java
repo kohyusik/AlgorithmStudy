@@ -7,11 +7,11 @@ package step001.codility.lesson1;
  * @description :
  */
 
-public class BinaryGap {
+public class Test01 {
     
     
     public static void main(String[] args) {
-        BinaryGap countDiv = new BinaryGap();
+        Test01 countDiv = new Test01();
     
         // test case 1
         int gab = countDiv.solution(32);

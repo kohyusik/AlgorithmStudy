@@ -16,18 +16,25 @@
 <script>
 
     // JQuery data()
-    debugger;
+    // debugger;
     let $test = $('.test');
     // $test.data('test', 'jquery');
-    debugger;
+    // debugger;
     let jqueryData = $test.data('test'); // 처음에 내부 객체에 data가 없으면 속성 getAttribute(data-test) 값을 가져와 내부에 저장하고 해당 값을 리턴
-    console.log(jqueryData);
-    debugger;
+    console.log(jqueryData);// html
+    // debugger;
     jqueryData = $test.data('test'); // 위에서 세팅 된 값을 가져옴
+    console.log(jqueryData);// html
+
+    // set HTML dataset
+    document.querySelector('.test').dataset.test = 'HTML';
 
     // HTML5 dataset
     let htmlData = document.querySelector('.test').dataset.test;
-    console.log(htmlData);
+    console.log(htmlData); // HTML 출력
+
+    jqueryData = $test.data('test'); // 위에서 세팅 된 값을 가져오기 때문에 html 출력
+    console.log(jqueryData);
 
 </script>
 </body>
