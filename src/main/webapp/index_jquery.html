@@ -8,6 +8,10 @@
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"></script>
+    <!--<script-->
+            <!--src="https://code.jquery.com/jquery-1.12.4.js"-->
+            <!--integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="-->
+            <!--crossorigin="anonymous"></script>-->
 </head>
 <body>
 <div class="test" data-test="html">
@@ -16,7 +20,7 @@
 <script>
 
     // JQuery data()
-    // debugger;
+    debugger;
     let $test = $('.test');
     // $test.data('test', 'jquery');
     // debugger;
@@ -28,13 +32,15 @@
 
     // set HTML dataset
     document.querySelector('.test').dataset.test = 'HTML';
+    // $test.attr('data-test', 'JQUERY');
 
-    // HTML5 dataset
+    // HTML5 dataset/
     let htmlData = document.querySelector('.test').dataset.test;
     console.log(htmlData); // HTML 출력
 
     jqueryData = $test.data('test'); // 위에서 세팅 된 값을 가져오기 때문에 html 출력
     console.log(jqueryData);
+    console.log($test.attr('data-test'));
 
 </script>
 </body>
