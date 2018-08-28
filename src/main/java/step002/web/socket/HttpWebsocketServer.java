@@ -3,7 +3,9 @@ package step002.web.socket;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class HttpWebsocketServer {
 
@@ -29,7 +31,7 @@ public class HttpWebsocketServer {
 			int seq = 0;
 			while ((line = in.readLine()) != null) {
 				
-				if (seq == 5) {
+				if (seq == 6) {
 					if (line.contains("websocket")) {
 						type = "websocket";
 					}
@@ -81,15 +83,49 @@ public class HttpWebsocketServer {
 				
 			} else/* if ("websocket".equals(type))*/ {
 				
+				System.out.println("[WebSocket]");
+				String unique = key + WS_MAGIC_STRING;
+				MessageDigest md = MessageDigest.getInstance("SHA-1"); // 이 부분을 SHA-256, MD5로만 바꿔주면 된다.
+				md.update(unique.getBytes()); // "세이프123"을 SHA-1으로 변환할 예정!
+				
+				byte byteData[] = md.digest();
+				
+				StringBuffer sb = new StringBuffer();
+				for(int i=0; i<byteData.length; i++) {
+					sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+				}
+				
+				String retVal = sb.toString();
+				
+				System.out.println(retVal);
+				String accHd = new String(Base64.getEncoder().encode(byteData));
+				System.out.println(accHd);
+				// header
+				out.write("HTTP/1.1 101 Switching Protocols\r\n");
+				out.write("Upgrade: websocket\r\n");
+				out.write("Connection: Upgrade\r\n");
+				out.write("Sec-WebSocket-Accept: " + accHd + "\r\n");
+				out.write("Sec-WebSocket-Extensions: permessage-deflate;client_max_window_bits=15" + "\r\n");
+				//				out.write("Sec-WebSocket-Accept: " + "WXVjpcIMh5mK8bApeONPlq2DEHA=" + "\r\n");
+				out.write("\r\n");
+				
+				System.out.println("통신 끝");
+				
+				out.write(0x81);
+				out.write(0x4);
+				//				out.write('t');
+				out.flush();
+				
 				char[] cbuf = new char[1000];
 				while (true) {
 					int r = in.read(cbuf);
-//					out.write('t');
-//					out.write('e');
-//					out.write('s');
-//					out.flush();
+					//					out.write('t');
+					//					out.write('e');
+					//					out.write('s');
+					//					out.flush();
+					System.out.println("data start");
 					for (int i = 0; i < r; i++) {
-						System.out.println(cbuf[i]);
+						System.out.println((int)cbuf[i]);
 					}
 				}
 				
