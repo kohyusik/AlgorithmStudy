@@ -6,22 +6,22 @@ package step001.codility.lesson5;
  * @date : 2018-08-04
  * @description :
  */
-public class PassingCar {
+public class PermCheck {
 
     public static void main(String[] args) {
-        PassingCar passingCar = new PassingCar();
+        PermCheck permCheck = new PermCheck();
 
         // test case 1
         int[] test1 = new int[] {0, 1, 0, 1, 1};
-        int count = passingCar.solution(test1);
+        int count = permCheck.solution(test1);
         System.out.println("Answer : " + count);
 
         int[] test2 = new int[] {0, 0, 0, 1, 1};
-        int count2 = passingCar.solution(test2);
+        int count2 = permCheck.solution(test2);
         System.out.println("Answer : " + count2);
 
         int[] test3 = new int[] {0, 1, 1, 0, 1, 0, 1};
-        int count3 = passingCar.solution(test3);
+        int count3 = permCheck.solution(test3);
         System.out.println("Answer : " + count3);
 
     }

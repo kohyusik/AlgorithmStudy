@@ -9,7 +9,7 @@ package step001.codility.lesson5;
 public class PassingCar {
 
     public static void main(String[] args) {
-        PassingCar passingCar = new PassingCar();
+        PermCheck passingCar = new PermCheck();
 
         // test case 1
         int[] test1 = new int[] {0, 1, 0, 1, 1};
