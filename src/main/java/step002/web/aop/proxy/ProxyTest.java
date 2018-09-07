@@ -12,18 +12,18 @@ public class ProxyTest {
     
     public static void main(String[] args) {
     
-        ProxyFactory proxyFactory = new ProxyFactory();
-        proxyFactory.setInterfaces(ServiceTest.class);
-        proxyFactory.setTarget(new ServiceTestImpl());
-        proxyFactory.addAdvice(new ServiceAdvice());
-        final ServiceTest proxy = (ServiceTest) proxyFactory.getProxy();
-        System.out.println(proxy.getClass());
-    
 //        ProxyFactory proxyFactory = new ProxyFactory();
+//        proxyFactory.setInterfaces(ServiceTest.class);
 //        proxyFactory.setTarget(new ServiceTestImpl());
 //        proxyFactory.addAdvice(new ServiceAdvice());
-//        ServiceTestImpl proxy = (ServiceTestImpl) proxyFactory.getProxy();
+//        final ServiceTest proxy = (ServiceTest) proxyFactory.getProxy();
 //        System.out.println(proxy.getClass());
+    
+        ProxyFactory proxyFactory = new ProxyFactory();
+        proxyFactory.setTarget(new ServiceTestImpl());
+        proxyFactory.addAdvice(new ServiceAdvice());
+        ServiceTestImpl proxy = (ServiceTestImpl) proxyFactory.getProxy();
+        System.out.println(proxy.getClass());
     }
     
 }
