@@ -37,7 +37,7 @@ public class HttpWebsocketServer {
 					}
 				}
 				
-				if (seq == 12) {
+				if (seq == 11) {
 					key = line.replace("Sec-WebSocket-Key: ", "");
 				}
 				
@@ -91,7 +91,7 @@ public class HttpWebsocketServer {
 				byte byteData[] = md.digest();
 				
 				StringBuffer sb = new StringBuffer();
-				for(int i=0; i<byteData.length; i++) {
+				for(int i=0; i < byteData.length; i++) {
 					sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
 				}
 				
@@ -105,7 +105,7 @@ public class HttpWebsocketServer {
 				out.write("Upgrade: websocket\r\n");
 				out.write("Connection: Upgrade\r\n");
 				out.write("Sec-WebSocket-Accept: " + accHd + "\r\n");
-				out.write("Sec-WebSocket-Extensions: permessage-deflate;client_max_window_bits=15" + "\r\n");
+//				out.write("Sec-WebSocket-Extensions: permessage-deflate;client_max_window_bits=15" + "\r\n");
 				//				out.write("Sec-WebSocket-Accept: " + "WXVjpcIMh5mK8bApeONPlq2DEHA=" + "\r\n");
 				out.write("\r\n");
 				
@@ -119,10 +119,7 @@ public class HttpWebsocketServer {
 				char[] cbuf = new char[1000];
 				while (true) {
 					int r = in.read(cbuf);
-					//					out.write('t');
-					//					out.write('e');
-					//					out.write('s');
-					//					out.flush();
+					System.out.println(cbuf);
 					System.out.println("data start");
 					for (int i = 0; i < r; i++) {
 						System.out.println((int)cbuf[i]);
