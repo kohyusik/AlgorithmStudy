@@ -43,7 +43,7 @@ public class HttpWebsocketServer {
 				
 				System.out.print(seq++ + " : ");
 				System.out.println(line);
-				
+                
 				if (line.isEmpty()) {
 					break;
 				}
@@ -117,14 +117,14 @@ public class HttpWebsocketServer {
 				out.flush();
 				
 				char[] cbuf = new char[1000];
-				while (true) {
-					int r = in.read(cbuf);
-					System.out.println(cbuf);
-					System.out.println("data start");
-					for (int i = 0; i < r; i++) {
-						System.out.println((int)cbuf[i]);
-					}
-				}
+//				while (true) {
+//					int r = in.read(cbuf);
+//					System.out.println(cbuf);
+//					System.out.println("data start");
+//					for (int i = 0; i < r; i++) {
+//						System.out.println((int)cbuf[i]);
+//					}
+//				}
 				
 //				Runnable t1 = () -> {
 //					try {
