@@ -11,45 +11,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 </head>
 <body>
-<div><button id="btnSnd">TEST</button></div>
+<div>
+    <button id="btnSnd">TEST</button>
+    <br/>
+
+    <input type="date" id="date">
+    <input class="timeInput" type="time" id="fromTime" step="1800">
+    <input class="timeInput" type="time" id="toTime" step="1800">
+</div>
 <script>
+    var btnSnd = document.querySelector('#btnSnd'),
+        date = document.querySelector('#date'),
+        timeInput = document.querySelectorAll('.timeInput'),
+        fromTime = document.querySelector('#fromTime'),
+        toTime = document.querySelector('#toTime');
 
-    console.log('started');
-    let current = moment().tz('Asia/Seoul').format('L hh:mm A');
-    console.log(current);
-    current = moment().tz('US/Pacific').format('L hh:mm A');
+    btnSnd.addEventListener('click', function(e) {
+        var now = new Date();
+        date.value = '2018-08-28';
+        fromTime.value = '09:00';
+    });
 
-    let testTime1 = moment('02:00 PM', 'hh:mm A');
-    let testTime2 = moment('03:00 PM', 'hh:mm A');
-    let testTime3 = moment('09:00 AM', 'hh:mm A');
-
-    console.log('testTime1.isAfter(testTime2)', testTime1.isBefore(testTime2));
-    console.log('testTime2.isAfter(testTime3)', testTime2.isBefore(testTime3));
-    console.log('testTime2.isAfter(testTime3)', testTime2.isBefore(null));
-
-    let testM = moment('06/21/2018 09:00 AM', 'L hh:mm A');
-    console.log('testM', testM.format('L'));
-
-
-    var sock = new SockJS("/ws");
-    var client = Stomp.over(sock); // 1. SockJS를 내부에 들고 있는 client를 내어준다.
-
-    // 2. connection이 맺어지면 실행된다.
-    client.connect({}, function () {
-        // 3. send(path, header, message)로 메시지를 보낼 수 있다.
-        client.send('/app/chat', {}, JSON.stringify({chatRoomId: 1234, writer: 'koh'}));
-        // 4. subscribe(path, callback)로 메시지를 받을 수 있다. callback 첫번째 파라미터의 body로 메시지의 내용이 들어온다.
-        client.subscribe('/topic/chat', function (chat) {
-            console.log(chat);
+    for (var i = 0; i < timeInput.length; i++) {
+        timeInput[i].addEventListener('keyup', function(e) {
+            e.preventDefault();
         });
-    });
+        timeInput[i].addEventListener('keydown', function(e) {
+            e.preventDefault();
+        });
+    }
 
-    document.querySelector("#btnSnd").addEventListener('click', function () {
-        client.send('/app/chat', {}, JSON.stringify({chatRoomId: 1234, message: '1234', writer: ''}));
+    toTime.addEventListener('change', function() {
+        if (this.value !== '' && fromTime.value !== '') {
+            var fromDate = new Date(date.value + ' ' + fromTime.value);
+            var toDate = new Date(date.value + ' ' + this.value);
+            if (fromDate.getTime() > toDate.getTime()) {
+                alert("시작 시간보다 과거를 선택할 수 없음");
+                fromDate.setTime(fromDate.getTime() + 60 * 30 * 1000);
+                var hour = fromDate.getHours() < 10 ? '0' + fromDate.getHours() : fromDate.getHours();
+                this.value = hour + ':' + fromDate.getMinutes();
+            }
+        }
     });
-
 
 </script>
-
 </body>
 </html>

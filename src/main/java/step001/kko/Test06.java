@@ -24,7 +24,7 @@ public class Test06 {
         		"RRFACC", 
         		"RRRFCC", 
         		"TRRRAA", 
-        		"TTMMMF", 
+        		"TTMMMF",
         		"TMMTTJ"};
         System.out.println("score : " + playGame(createBoard(6, 6, input2)));
         System.out.println();System.out.println();System.out.println("==========================");System.out.println();
