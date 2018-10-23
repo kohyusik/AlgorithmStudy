@@ -60,7 +60,7 @@ public class HttpWebsocketServer {
 				out.write("Content-Length: zz\r\n");
 				out.write("Expires: Sat, 14 March 1988 00:59:59 GMT\r\n");
 				out.write("Last-modified: Fri, 09 Aug 1996 03:14:44 GMT\r\n");
-				
+
 				// body
 				out.write("\r\n");
 				out.write("<html>");
