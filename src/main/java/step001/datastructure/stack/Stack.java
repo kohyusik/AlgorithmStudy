@@ -19,7 +19,7 @@ public class Stack<E> {
 
     public boolean isEmpty() {
 
-        if (elements.length == 0) {
+        if (pos == 0) {
             return true;
         } else {
             return false;
@@ -47,7 +47,10 @@ public class Stack<E> {
 
         Stack<Integer> stack = new Stack<>(10);
 
+        System.out.println(stack.isEmpty());
+
         stack.push(1);
+        System.out.println(stack.isEmpty());
         stack.push(3);
         stack.push(2);
         stack.push(4);

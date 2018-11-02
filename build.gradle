@@ -65,6 +65,16 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-messaging
     compile group: 'org.springframework', name: 'spring-messaging', version: '5.0.8.RELEASE'
 
+    // https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client
+    compile group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: '2.0.4'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+//    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.0.RELEASE'
+//
+//
+//    compile("org.springframework.boot:spring-boot-starter-web")
+
+
+
 
 
 }

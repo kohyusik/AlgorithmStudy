@@ -4,6 +4,13 @@ spring:
   devtools:
     livereload:
       enabled: true
+
+  application:
+    name: spring-boot-teste
+  boot:
+    admin:
+      client:
+        url: http://192.168.100.70:8080
 #  freemarker:
 #    cache: false
 
@@ -13,3 +20,14 @@ spring:
 
 #redis:
 #  server:
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+

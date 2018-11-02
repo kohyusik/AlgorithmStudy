@@ -54,7 +54,7 @@ public class TestAES256Util {
             System.out.printf("%d :\t%s\n", encrypted.length(), encrypted);
             
             assertEquals(decrypted, plainText);
-            
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
