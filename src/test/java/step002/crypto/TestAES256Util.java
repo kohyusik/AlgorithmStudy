@@ -8,6 +8,8 @@ import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -26,11 +28,15 @@ public class TestAES256Util {
     
         KeyGenerator generator = null;
         try {
+            
             generator = KeyGenerator.getInstance("AES");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
     
+    
             generator.init(128, random);
             Key secureKey = generator.generateKey();
+            System.out.println(secureKey.getFormat());
+            System.out.println(secureKey.getEncoded());
     
             assertEquals(secureKey.getAlgorithm(), "AES");
             
@@ -43,15 +49,16 @@ public class TestAES256Util {
     public void getUtilInstance() {
     
         try {
-            AES256Util aes256Util = new AES256Util("abcdefghijklmnop");
+            AES256Util aes256Util = new AES256Util("t+rU_M_pi-A_dE+v");
             
             String plainText = "12351235235aklshjzxc.v/123515!@#%!@";
+            String plainTextt = "6 6 3 7 2 11 12 ";
             
             String encrypted = aes256Util.encrypt(plainText);
-            System.out.printf("%d :\t%s\n", plainText.length(), plainText);
+            System.out.println(String.format("%d :\t%s", plainText.length(), plainText));
             
             String decrypted = aes256Util.decrypt(encrypted);
-            System.out.printf("%d :\t%s\n", encrypted.length(), encrypted);
+            System.out.println(String.format("%d :\t%s", encrypted.length(), encrypted));
             
             assertEquals(decrypted, plainText);
 
@@ -62,5 +69,17 @@ public class TestAES256Util {
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Test
+    public void dateTimeTest() {
+    
+        LocalDateTime now = LocalDateTime.now();
+        //        LocalDateTime now = LocalDateTime.of(2018, 10, 16, 15, 07, 06);
+        //        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss.SSS", Locale.KOREA);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
+    
+        String nowString = now.format(dateTimeFormatter);
+        System.out.println(nowString);
     }
 }
