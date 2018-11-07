@@ -25,33 +25,43 @@ class Solution {
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     
-        ListNode sum = null;
+        ListNode head = null;
         ListNode p = null;
         ListNode p1 = l1;
         ListNode p2 = l2;
-        
         int carry = 0;
-        while (p1 != null && p2 != null) {
+        
+        do {
             
-            if (sum == null) {
-                sum = new ListNode(-1);
-                p = sum;
+            // sum
+            int sum = carry;
+            carry = 0; // reset carry
+            if (p1 != null) {
+                sum += p1.val;
+                p1 = p1.next;
+            }
+            if (p2 != null) {
+                sum += p2.val;
+                p2 = p2.next;
             }
             
-            p.val = p1.val + p2.val + carry;
-            carry = 0;
-            
-            if (p.val > 9) {
-                carry++;
-                p.val = p.val % 10;
+            // carry
+            if (sum > 9) {
+                carry = 1;
+                sum = sum % 10;
             }
             
-            p.next = new ListNode(-1);
+            if (head == null) {
+                p = new ListNode(sum);
+                head = p; // set head
+            } else {
+                p.next = new ListNode(sum);
+                p = p.next;
+            }
             
-            p = p.next;
-            p1 = p1.next;
-            p2 = p2.next;
-        }
-        return sum;
+        
+        } while (p1 != null || p2 != null || carry > 0);
+        
+        return head;
     }
 }
