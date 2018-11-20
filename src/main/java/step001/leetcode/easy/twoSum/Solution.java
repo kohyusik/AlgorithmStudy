@@ -11,13 +11,13 @@ import java.util.Arrays;
  * }
  */
 class Solution {
-    
+
     public static void main(String[] args) {
-        
+
         // test case 1
         int[] nums = new int[] {2, 7, 11, 15};
         int target = 9;
-        
+
         int[] answer = new Solution().twoSum(nums, target);
         System.out.println(Arrays.toString(answer));
     }
