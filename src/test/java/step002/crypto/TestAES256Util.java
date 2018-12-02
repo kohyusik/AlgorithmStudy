@@ -1,5 +1,6 @@
 package step002.crypto;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.crypto.KeyGenerator;
@@ -11,7 +12,8 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * @author : kohyusik
@@ -25,7 +27,8 @@ public class TestAES256Util {
     
     @Test
     public void keyGenerate() {
-    
+
+
         KeyGenerator generator = null;
         try {
             
