@@ -14,6 +14,7 @@ public class TestInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     
         System.out.println("TestInterceptor preHandle");
+        request.getParametermap
 
 //        if (true) throw new NullPointerException();
         return true;

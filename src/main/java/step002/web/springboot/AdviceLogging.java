@@ -10,10 +10,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 @Aspect
 public class AdviceLogging {
@@ -120,12 +118,7 @@ public class AdviceLogging {
             System.out.println(arg);
 
         }
-        HttpServletRequest req = (HttpServletRequest)args[0];
-        String t1 = req.getParameter("t1");
-        System.out.println(t1);
-        Map map = req.getParameterMap();
-        System.out.println(map.get("t1").toString());
-        
+
         args[1] = "Attack";
         System.out.println(method.getDeclaredAnnotations()[0]);
         System.out.println(method.getDeclaredAnnotations()[1]);
